@@ -42,8 +42,6 @@ public class SlotImpl implements Slot {
 
     @Override
     public boolean equals(Slot slot) {
-        return this.color == slot.getColor()
-            && this.position == slot.getPosition()
-            && this.number == slot.getNumber();
+        return this.color == slot.getColor() && this.number == slot.getNumber();
     }
 }
