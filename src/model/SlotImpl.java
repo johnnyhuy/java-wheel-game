@@ -3,6 +3,8 @@ package model;
 import model.enumeration.Color;
 import model.interfaces.Slot;
 
+import static helper.StringHelper.capitalize;
+
 public class SlotImpl implements Slot {
     private int position;
     private Color color;
@@ -21,7 +23,7 @@ public class SlotImpl implements Slot {
      */
     public String toString() {
         final String format = "Position: %d, Color: %s, Number: %d";
-        return String.format(format, position, color, number);
+        return String.format(format, position, capitalize(color), number);
     }
 
     /**
