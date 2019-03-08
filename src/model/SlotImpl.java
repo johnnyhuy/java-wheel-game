@@ -24,22 +24,42 @@ public class SlotImpl implements Slot {
         return String.format(format, position, color, number);
     }
 
+    /**
+     * Overridden method to get the slot position.
+     *
+     * @return int
+     */
     @Override
     public int getPosition() {
         return this.position;
     }
 
+    /**
+     * Overridden method to get the slot number.
+     *
+     * @return int
+     */
     @Override
     public int getNumber() {
         return this.number;
     }
 
+    /**
+     * Overridden method to get the slot color.
+     *
+     * @return Color
+     */
     @Override
     public Color getColor() {
         return this.color;
     }
 
-
+    /**
+     * Compare slot with another one.
+     *
+     * @param slot - another Slot to compare with
+     * @return boolean
+     */
     @Override
     public boolean equals(Slot slot) {
         return this.color == slot.getColor() && this.number == slot.getNumber();
