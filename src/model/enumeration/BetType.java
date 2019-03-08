@@ -20,9 +20,23 @@ public enum BetType
          // TODO implementation
       }
    },
-   
-   // TODO finish this class with other enum constants
- 
+   BLACK
+   {
+      @Override
+      public void applyWinLoss(Player player, Slot winSlot)
+      {
+         // TODO implementation
+      }
+   },
+   ZEROS
+   {
+      @Override
+      public void applyWinLoss(Player player, Slot winSlot)
+      {
+         // TODO implementation
+      }
+   };
+
    /**
     * This method is to be overridden for each bet type<br>
     * see assignment specification for betting odds and how win/loss is applied
