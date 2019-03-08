@@ -54,8 +54,7 @@ public class SimpleTestClient {
             gameEngine.addPlayer(player);
             // mod with BetType length so we always stay in range even if num players increases
             // NOTE: we are passing a different BetType each time!
-            gameEngine.placeBet(player, 100, BetType.values()[enumOrdinal++ % BetType
-                .values().length]);
+            gameEngine.placeBet(player, 100, BetType.values()[enumOrdinal++ % BetType.values().length]);
         }
 
         logger.log(Level.INFO, "SPINNING ...");

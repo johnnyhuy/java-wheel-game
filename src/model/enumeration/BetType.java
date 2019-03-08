@@ -13,19 +13,37 @@ public enum BetType {
     RED {
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
-            // TODO implementation
+            if (winSlot.getColor() == Color.RED) {
+                int winningPoints = player.getBet();
+                int currentPlayerPoints = player.getPoints();
+
+                player.setPoints(currentPlayerPoints + winningPoints);
+            }
         }
     },
     BLACK {
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
-            // TODO implementation
+            if (winSlot.getColor() == Color.BLACK) {
+                int winningPoints = player.getBet();
+                int currentPlayerPoints = player.getPoints();
+
+                player.setPoints(currentPlayerPoints + winningPoints);
+            }
         }
     },
     ZEROS {
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
-            // TODO implementation
+            int slotSize = Slot.WHEEL_SIZE;
+
+            if (winSlot.getColor() == Color.GREEN0 || winSlot.getColor() == Color.GREEN00) {
+                int rewardMultiplier = (slotSize / 2) - 1;
+                int winningPoints = player.getBet() * rewardMultiplier;
+                int currentPlayerPoints = player.getPoints();
+
+                player.setPoints(currentPlayerPoints + winningPoints);
+            }
         }
     };
 
