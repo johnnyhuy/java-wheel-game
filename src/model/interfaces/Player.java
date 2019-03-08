@@ -6,11 +6,11 @@ import model.enumeration.BetType;
  * <pre> Assignment interface for Further Programming representing the player
  * to be implemented by SimplePlayer class with the following constructor:
  * 	  <b>public SimplePlayer(String playerId, String playerName, int initialPoints)</b>
- * 
+ *
  * <b>NOTE:</b> playerID is unique and if another player with same id is added it replaces the previous player</pre>
  *
  * @author Caspar Ryan
- * 
+ *
  */
 public interface Player
 {
@@ -25,7 +25,7 @@ public interface Player
    public abstract void setPlayerName(String playerName);
 
    /**
-    * 
+    *
     * @return - number of points from setPoints()
     */
    public abstract int getPoints();
@@ -42,7 +42,7 @@ public interface Player
 
    /**
     * <b>NOTE:</b> must use resetBet() for 0 bet since not valid for this method
-    * 
+    *
     * @param bet - the bet in points
     * @return true - if bet is greater than 0 and player has sufficient points to place the bet<br>
     */
