@@ -8,7 +8,7 @@ public class SimplePlayer implements Player {
     private String playerName;
     private int playerPoints;
 
-    public int bet;
+    private int bet;
 
     public SimplePlayer(String playerId, String playerName, int playerPoints) {
         this.playerId = playerId;

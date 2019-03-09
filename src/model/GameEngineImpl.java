@@ -10,9 +10,12 @@ import view.interfaces.GameEngineCallback;
 import java.util.*;
 
 public class GameEngineImpl implements GameEngine {
+    private Collection<Player> players = new ArrayList<>();
+
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
-
+        Collection<Slot> wheelSlots = getWheelSlots();
+        int randomIndex = new Random().nextInt(wheelSlots.size());
     }
 
     @Override
@@ -22,16 +25,40 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void addPlayer(Player player) {
-
+        this.players.add(player);
     }
 
     @Override
     public Player getPlayer(String id) {
+        for (Player player : this.players) {
+            if (player.getPlayerId().equals(id)) {
+                return player;
+            }
+        }
+
         return null;
     }
 
+    /**
+     * Remove player from game.
+     *
+     * @param player - to remove from game
+     * @return boolean
+     */
     @Override
     public boolean removePlayer(Player player) {
+        Iterator<Player> iterator = this.players.iterator();
+
+        while (iterator.hasNext()) {
+            Player iteratorPlayer = iterator.next();
+
+            if (player.getPlayerId().equals(iteratorPlayer.getPlayerId())) {
+                iterator.remove();
+
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -47,7 +74,7 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public Collection<Player> getAllPlayers() {
-        return null;
+        return this.players;
     }
 
     @Override
