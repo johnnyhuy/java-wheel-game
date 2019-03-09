@@ -5,6 +5,10 @@ import model.SimplePlayer;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import org.junit.jupiter.api.Test;
+import view.GameEngineCallbackImpl;
+import view.interfaces.GameEngineCallback;
+
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,5 +101,50 @@ class GameEngineTest {
         // Assert
         assertFalse(playerRemoved);
         assertEquals(3, gameEngine.getAllPlayers().size());
+    }
+
+    @Test
+    void testAddGameEngineCallback() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback gameEngineCallback = new GameEngineCallbackImpl();
+        Exception unexpectedException = null;
+
+        // Act
+        try {
+            gameEngine.addGameEngineCallback(gameEngineCallback);
+        } catch (Exception exception) {
+            unexpectedException = exception;
+        }
+
+        // Assert
+        assertNull(unexpectedException);
+    }
+
+    @Test
+    void testRemoveExistingGameEngineCallback() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback gameEngineCallback = new GameEngineCallbackImpl();
+        gameEngine.addGameEngineCallback(gameEngineCallback);
+
+        // Act
+        boolean hasRemovedGameEngineCallback = gameEngine.removeGameEngineCallback(gameEngineCallback);
+
+        // Assert
+        assertTrue(hasRemovedGameEngineCallback);
+    }
+
+    @Test
+    void testRemoveGameEngineCallbackWhenDoesNotExist() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback gameEngineCallback = new GameEngineCallbackImpl();
+
+        // Act
+        boolean hasRemovedGameEngineCallback = gameEngine.removeGameEngineCallback(gameEngineCallback);
+
+        // Assert
+        assertFalse(hasRemovedGameEngineCallback);
     }
 }

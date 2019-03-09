@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GameEngineImpl implements GameEngine {
     private Collection<Player> players = new ArrayList<>();
+    private GameEngineCallback gameEngineCallback;
 
     /**
      * Get random slot from wheel of slots.
@@ -110,11 +111,16 @@ public class GameEngineImpl implements GameEngine {
 
     @Override
     public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
-
+        this.gameEngineCallback = gameEngineCallback;
     }
 
     @Override
     public boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback) {
+        if (this.gameEngineCallback != null) {
+            this.gameEngineCallback = null;
+            return true;
+        }
+
         return false;
     }
 
