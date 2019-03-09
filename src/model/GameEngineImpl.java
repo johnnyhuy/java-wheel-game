@@ -8,10 +8,33 @@ import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class GameEngineImpl implements GameEngine {
     private Collection<Player> players = new ArrayList<>();
 
+    /**
+     * Get random slot from wheel of slots.
+     *
+     * @param wheelSlots slots in the wheel
+     * @return Slot
+     */
+    private Slot GetRandomSlot(Collection<Slot> wheelSlots) {
+        int randomIndex = new Random().nextInt(wheelSlots.size());
+        return (Slot) wheelSlots.toArray()[randomIndex];
+    }
+
+    /**
+     * Spin da wheel if you know what I'm sayin'
+     *
+     * @param initialDelay
+     *            the starting delay in ms between updates
+     *            (based on how fast the ball is rolling in the slots)
+     * @param finalDelay
+     *            the final delay in ms between updates when the ball stops rolling
+     * @param delayIncrement
+     *            how much the ball slows down (i.e. delay gets longer) after each slot
+     */
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         Collection<Slot> wheelSlots = getWheelSlots();
@@ -23,11 +46,22 @@ public class GameEngineImpl implements GameEngine {
 
     }
 
+    /**
+     * Add player to game.
+     *
+     * @param player - to add to game
+     */
     @Override
     public void addPlayer(Player player) {
         this.players.add(player);
     }
 
+    /**
+     * Get players by ID.
+     *
+     * @param id - id of player to retrieve (null if not found)
+     * @return Player
+     */
     @Override
     public Player getPlayer(String id) {
         for (Player player : this.players) {
@@ -82,6 +116,11 @@ public class GameEngineImpl implements GameEngine {
         return false;
     }
 
+    /**
+     * Get the slots in the wheel.
+     *
+     * @return Collection
+     */
     @Override
     public Collection<Slot> getWheelSlots() {
         final int[] wheelNumbers = new int[] {
