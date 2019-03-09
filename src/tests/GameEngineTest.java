@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
-import java.util.concurrent.ExecutionException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameEngineTest {
