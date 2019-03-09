@@ -38,7 +38,19 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         Collection<Slot> wheelSlots = getWheelSlots();
-        int randomIndex = new Random().nextInt(wheelSlots.size());
+        Slot randomSlot = GetRandomSlot(wheelSlots);
+        int delay = initialDelay;
+
+        while (delay <= finalDelay) {
+            delay = delay + delayIncrement;
+
+
+            try {
+                TimeUnit.MILLISECONDS.sleep(delayIncrement);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
