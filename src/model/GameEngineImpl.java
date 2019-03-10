@@ -15,17 +15,6 @@ public class GameEngineImpl implements GameEngine {
     private GameEngineCallback gameEngineCallback;
 
     /**
-     * Get random slot from wheel of slots.
-     *
-     * @param wheelSlots slots in the wheel
-     * @return Slot
-     */
-    private Slot GetRandomSlot(Collection<Slot> wheelSlots) {
-        int randomIndex = new Random().nextInt(wheelSlots.size());
-        return (Slot) wheelSlots.toArray()[randomIndex];
-    }
-
-    /**
      * Spin da wheel if you know what I'm sayin'
      *
      * @param initialDelay
@@ -38,13 +27,27 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
-        Collection<Slot> wheelSlots = getWheelSlots();
-        Slot randomSlot = GetRandomSlot(wheelSlots);
         int delay = initialDelay;
 
-        while (delay <= finalDelay) {
-            delay = delay + delayIncrement;
+        // TODO: make this a toList() extension method
+        List<Slot> wheelSlots = new ArrayList<>(getWheelSlots());
 
+        // Select a random slot in the list
+        int index = new Random().nextInt(wheelSlots.size());
+        Slot selectedSlot = wheelSlots.get(index);
+
+        do {
+            // Reset the list when we reach the end
+            if (index >= wheelSlots.size()) {
+                index = 0;
+            }
+
+            // Get the next slot
+            selectedSlot = wheelSlots.get(index);
+            this.gameEngineCallback.nextSlot(selectedSlot, this);
+
+            index++;
+            delay = delay + delayIncrement;
 
             try {
                 TimeUnit.MILLISECONDS.sleep(delayIncrement);
@@ -52,6 +55,15 @@ public class GameEngineImpl implements GameEngine {
                 e.printStackTrace();
             }
         }
+        while (delay <= finalDelay);
+
+        if (index >= wheelSlots.size()) {
+            index = 0;
+        }
+
+        selectedSlot = wheelSlots.get(index);
+
+        this.gameEngineCallback.result(selectedSlot, this);
     }
 
     @Override

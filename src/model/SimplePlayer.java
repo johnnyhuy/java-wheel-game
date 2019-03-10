@@ -44,7 +44,6 @@ public class SimplePlayer implements Player {
     @Override
     public boolean setBet(int bet) {
         this.bet = bet;
-
         return true;
     }
 
