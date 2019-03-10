@@ -34,12 +34,10 @@ public class GameEngineImpl implements GameEngine {
 
         // Select a random slot in the list
         int index = new Random().nextInt(wheelSlots.size());
-        Slot selectedSlot;
 
         do {
             // Get the next slot
-            selectedSlot = wheelSlots.get(index);
-            this.gameEngineCallback.nextSlot(selectedSlot, this);
+            this.gameEngineCallback.nextSlot(wheelSlots.get(index), this);
 
             // Increment index and loop back
             index++;
@@ -57,9 +55,7 @@ public class GameEngineImpl implements GameEngine {
         }
         while (delay <= finalDelay);
 
-        selectedSlot = wheelSlots.get(index);
-
-        this.gameEngineCallback.result(selectedSlot, this);
+        this.gameEngineCallback.result(wheelSlots.get(index), this);
     }
 
     @Override
