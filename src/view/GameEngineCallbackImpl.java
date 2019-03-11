@@ -1,6 +1,7 @@
 package view;
 
 import model.interfaces.GameEngine;
+import model.interfaces.Player;
 import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
@@ -20,14 +21,13 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 
     public GameEngineCallbackImpl() {
         logger.setLevel(Level.FINE);
+        Logger.getGlobal().getParent().getHandlers()[0].setLevel(Level.FINE);
     }
 
     @Override
     public void nextSlot(Slot slot, GameEngine engine) {
-        final String format = "Next slot: Position: %d, Color: %s, Number: %d";
-
         logger.log(Level.FINE, String.format(
-            format,
+            "Next slot: Position: %d, Color: %s, Number: %d",
             slot.getPosition(),
             capitalize(slot.getColor()),
             slot.getNumber()
@@ -36,18 +36,20 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
 
     @Override
     public void result(Slot result, GameEngine engine) {
-        final String format = "RESULT=Position: %d, Color: %s, Number: %d";
-
-        logger.log(
-            Level.FINE,
+        logger.log(Level.FINE,
             String.format(
-                format,
+                "RESULT=Position: %d, Color: %s, Number: %d\n",
                 result.getPosition(),
                 capitalize(result.getColor()),
                 result.getNumber()
             )
         );
 
+        logger.log(Level.INFO, "FINAL PLAYER POINT BALANCES");
+
         engine.calculateResult(result);
+
+        for (Player player : engine.getAllPlayers())
+            logger.log(Level.INFO, player.toString());
     }
 }
