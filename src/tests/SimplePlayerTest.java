@@ -3,7 +3,7 @@ import model.enumeration.BetType;
 import model.interfaces.Player;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SimplePlayerTest {
     @Test
@@ -74,20 +74,6 @@ class SimplePlayerTest {
     }
 
     @Test
-    void testSetAndGetPlayerBet() {
-        // Arrange
-        final int expectedPlayerBet = 1000;
-        final Player player = new SimplePlayer("1", "Dode", 1000);
-
-        // Act
-        player.setBet(expectedPlayerBet);
-        int playerBet = player.getBet();
-
-        // Assert
-        assertEquals(expectedPlayerBet, playerBet);
-    }
-
-    @Test
     void testSetAndGetPlayerBetType() {
         // Arrange
         final BetType expectedBetType = BetType.BLACK;
@@ -114,5 +100,32 @@ class SimplePlayerTest {
 
         // Assert
         assertEquals(expectedPlayerString, playerString);
+    }
+
+    @Test
+    void testSetAndGetPlayerBet() {
+        // Arrange
+        final int expectedPlayerBet = 1000;
+        final Player player = new SimplePlayer("1", "Dode", 1000);
+
+        // Act
+        boolean bet = player.setBet(expectedPlayerBet);
+        int playerBet = player.getBet();
+
+        // Assert
+        assertTrue(bet);
+        assertEquals(expectedPlayerBet, playerBet);
+    }
+
+    @Test
+    void testPlayerSetBetInsufficientPoints() {
+        // Arrange
+        final Player player = new SimplePlayer("1", "Dode", 100);
+
+        // Act
+        boolean bet = player.setBet(2000);
+
+        // Assert
+        assertFalse(bet);
     }
 }

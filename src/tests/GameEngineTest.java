@@ -2,6 +2,7 @@ package tests;
 
 import model.GameEngineImpl;
 import model.SimplePlayer;
+import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import org.junit.jupiter.api.Test;
@@ -144,5 +145,92 @@ class GameEngineTest {
 
         // Assert
         assertFalse(hasRemovedGameEngineCallback);
+    }
+
+    @Test
+    void testPlayerPlaceBetIsNegativeBetAmount() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Player player = new SimplePlayer("apples", "Test player", 100);
+        gameEngine.addPlayer(player);
+
+        // Act
+        boolean bet = gameEngine.placeBet(player, -3000, BetType.BLACK);
+
+        // Assert
+        assertFalse(bet);
+        assertEquals(0, player.getBet());
+        assertNull(player.getBetType());
+    }
+
+    @Test
+    void testPlayerPlaceBetIsZero() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Player player = new SimplePlayer("apples", "Test player", 100);
+        gameEngine.addPlayer(player);
+
+        // Act
+        boolean bet = gameEngine.placeBet(player, 0, BetType.BLACK);
+
+        // Assert
+        assertFalse(bet);
+        assertEquals(0, player.getBet());
+        assertNull(player.getBetType());
+    }
+
+    @Test
+    void testPlayerPlaceBetPlayerInsufficientPoints() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Player player = new SimplePlayer("apples", "Test player", 100);
+        gameEngine.addPlayer(player);
+
+        // Act
+        boolean bet = gameEngine.placeBet(player, 9000, BetType.BLACK);
+
+        // Assert
+        assertFalse(bet);
+        assertEquals(0, player.getBet());
+        assertNull(player.getBetType());
+    }
+
+    @Test
+    void testPlayerPlaceBet() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Player player = new SimplePlayer("apples", "Test player", 100);
+        gameEngine.addPlayer(player);
+
+        // Act
+        boolean bet = gameEngine.placeBet(player, 100, BetType.BLACK);
+
+        // Assert
+        assertTrue(bet);
+        assertEquals(100, player.getBet());
+        assertNotNull(player.getBetType());
+    }
+
+    @Test
+    void testMakeBetsAndCalculateResult() {
+        // Arrange
+        final int initialPoints = 1000;
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback gameEngineCallback = new GameEngineCallbackImpl();
+        gameEngine.addGameEngineCallback(gameEngineCallback);
+
+        final Player player = new SimplePlayer("1", "Come In Spinner", initialPoints);
+        gameEngine.addPlayer(player);
+        gameEngine.placeBet(player, 100, BetType.BLACK);
+        gameEngine.placeBet(player, 100, BetType.RED);
+        gameEngine.placeBet(player, 100, BetType.ZEROS);
+
+        // Act
+        gameEngine.spin(1, 100, 5);
+
+        // Assert
+        assertNotEquals(initialPoints, player.getPoints());
+        // Gamer wins at least once >:)
+        assertTrue(player.getPoints() > (initialPoints - 300));
     }
 }

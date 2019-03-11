@@ -58,6 +58,11 @@ public class GameEngineImpl implements GameEngine {
         this.gameEngineCallback.result(wheelSlots.get(index), this);
     }
 
+    /**
+     * Calculate game results on the winning slot.
+     *
+     * @param winningSlot - the winning slot as passed to GameEngineCallback.result(...)
+     */
     @Override
     public void calculateResult(Slot winningSlot) {
 
@@ -113,11 +118,24 @@ public class GameEngineImpl implements GameEngine {
         return false;
     }
 
+    /**
+     * Add the game engine callback implementation to the game.
+     *
+     * @param gameEngineCallback <pre> a client specific implementation of GameEngineCallback used to perform display updates etc.
+     *                                                     <b>NOTE:</b> you will use a different implementation of the GameEngineCallback
+     *                                                           for the console (assignment 1) and GUI (assignment 2) versions</pre>
+     */
     @Override
     public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
         this.gameEngineCallback = gameEngineCallback;
     }
 
+    /**
+     * Remove the game engine callback.
+     *
+     * @param gameEngineCallback - instance to be removed if no longer needed
+     * @return boolean - true if the callback implementation has been removed
+     */
     @Override
     public boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback) {
         if (this.gameEngineCallback != null) {
@@ -128,13 +146,31 @@ public class GameEngineImpl implements GameEngine {
         return false;
     }
 
+    /**
+     * Get all players in the game.
+     *
+     * @return Collection
+     */
     @Override
     public Collection<Player> getAllPlayers() {
         return this.players;
     }
 
+    /**
+     * Place a bet on behalf of the player.
+     *
+     * @param player  - the Player who is placing the bet
+     * @param bet     - the bet in points
+     * @param betType - the type of bet (red, black or either zero)
+     * @return boolean - true if bet has been placed
+     */
     @Override
     public boolean placeBet(Player player, int bet, BetType betType) {
+        if (bet > 0 && player.setBet(bet)) {
+            player.setBetType(betType);
+            return true;
+        }
+
         return false;
     }
 

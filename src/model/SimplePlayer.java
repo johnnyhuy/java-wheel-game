@@ -90,8 +90,12 @@ public class SimplePlayer implements Player {
      */
     @Override
     public boolean setBet(int bet) {
-        this.bet = bet;
-        return true;
+        if (this.playerPoints >= bet) {
+            this.bet = bet;
+            return true;
+        }
+
+        return false;
     }
 
     /**
