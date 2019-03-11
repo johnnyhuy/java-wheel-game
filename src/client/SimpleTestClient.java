@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 public class SimpleTestClient {
     private static final Logger logger = Logger.getLogger(SimpleTestClient.class.getName());
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         final GameEngine gameEngine = new GameEngineImpl();
 
         // call method in Validator.jar to test *structural* correctness
@@ -63,7 +63,7 @@ public class SimpleTestClient {
         // OutputTrace.txt was generated with these parameter values
         gameEngine.spin(1, 100, 5);
 
-        // TODO reset bets for next round if you were playing again
+        // TODO: reset bets for next round if you were playing again
     }
 
     // private helper method to log wheel slots
