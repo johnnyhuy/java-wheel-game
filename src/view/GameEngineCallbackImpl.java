@@ -44,12 +44,17 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
                 result.getNumber()
             )
         );
-
         logger.log(Level.INFO, "FINAL PLAYER POINT BALANCES");
 
         engine.calculateResult(result);
 
-        for (Player player : engine.getAllPlayers())
-            logger.log(Level.INFO, player.toString());
+        StringBuilder results = new StringBuilder();
+        for (Player player : engine.getAllPlayers()) {
+            results
+                .append("\n")
+                .append(player.toString());
+        }
+
+        logger.log(Level.INFO, results.toString());
     }
 }
