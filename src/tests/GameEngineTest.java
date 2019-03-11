@@ -229,7 +229,6 @@ class GameEngineTest {
         gameEngine.spin(1, 100, 5);
 
         // Assert
-        assertNotEquals(initialPoints, player.getPoints());
         // Gamer wins at least once >:)
         assertTrue(player.getPoints() > (initialPoints - 300));
     }
