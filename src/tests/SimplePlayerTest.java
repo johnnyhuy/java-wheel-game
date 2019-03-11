@@ -1,3 +1,5 @@
+package tests;
+
 import model.SimplePlayer;
 import model.enumeration.BetType;
 import model.interfaces.Player;

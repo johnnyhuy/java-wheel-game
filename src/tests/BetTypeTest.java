@@ -1,3 +1,5 @@
+package tests;
+
 import model.SimplePlayer;
 import model.SlotImpl;
 import model.enumeration.BetType;

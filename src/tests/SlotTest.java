@@ -1,3 +1,5 @@
+package tests;
+
 import model.SlotImpl;
 import model.enumeration.Color;
 import model.interfaces.Slot;
