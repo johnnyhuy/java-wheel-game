@@ -10,6 +10,8 @@ import view.interfaces.GameEngineCallback;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static helper.CollectionHelper.toList;
+
 public class GameEngineImpl implements GameEngine {
     private Collection<Player> players = new ArrayList<>();
     private GameEngineCallback gameEngineCallback;
@@ -29,8 +31,7 @@ public class GameEngineImpl implements GameEngine {
     public void spin(int initialDelay, int finalDelay, int delayIncrement) {
         int delay = initialDelay;
 
-        // TODO: make this a toList() extension method
-        List<Slot> wheelSlots = new ArrayList<>(getWheelSlots());
+        List<Slot> wheelSlots = toList(getWheelSlots());
 
         // Select a random slot in the list
         int index = new Random().nextInt(wheelSlots.size());
