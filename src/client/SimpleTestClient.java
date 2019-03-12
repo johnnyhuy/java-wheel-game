@@ -33,7 +33,7 @@ public class SimpleTestClient {
         // call method in Validator.jar to test *structural* correctness
         // just passing this does not mean it actually works .. you need to test yourself!
         // pass false if you want to show minimal logging (pass/fail) .. (i.e. ONLY once it passes)
-        Validator.validate(true);
+        Validator.validate(false);
 
         // create some test players
         Player[] players = new Player[] {
@@ -61,7 +61,7 @@ public class SimpleTestClient {
         // NOTE: result logging is done via GameEngineCallback.result()
         // after it calls GameEngine.calculateResult())
         // OutputTrace.txt was generated with these parameter values
-        gameEngine.spin(1, 100, 5);
+        gameEngine.spin(1, 500, 20);
 
         // TODO: reset bets for next round if you were playing again
     }
