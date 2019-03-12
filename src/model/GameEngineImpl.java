@@ -49,7 +49,7 @@ public class GameEngineImpl implements GameEngine {
             delay = delay + delayIncrement;
 
             try {
-                TimeUnit.MILLISECONDS.sleep(delayIncrement);
+                TimeUnit.MILLISECONDS.sleep(delay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
