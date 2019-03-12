@@ -14,7 +14,7 @@ import static helper.CollectionHelper.toList;
 
 public class GameEngineImpl implements GameEngine {
     private Collection<Player> players = new ArrayList<>();
-    private GameEngineCallback gameEngineCallback;
+    private Collection<GameEngineCallback> gameEngineCallbacks = new ArrayList<>();
 
     /**
      * Spin da wheel if you know what I'm sayin'
@@ -37,8 +37,9 @@ public class GameEngineImpl implements GameEngine {
         int index = new Random().nextInt(wheelSlots.size());
 
         do {
-            // Get the next slot
-            this.gameEngineCallback.nextSlot(wheelSlots.get(index), this);
+            for (GameEngineCallback gameEngineCallback : gameEngineCallbacks) {
+                gameEngineCallback.nextSlot(wheelSlots.get(index), this);
+            }
 
             // Increment index and loop back
             index++;
@@ -56,7 +57,9 @@ public class GameEngineImpl implements GameEngine {
         }
         while (delay <= finalDelay);
 
-        this.gameEngineCallback.result(wheelSlots.get(index), this);
+        for (GameEngineCallback gameEngineCallback : gameEngineCallbacks) {
+            gameEngineCallback.result(wheelSlots.get(index), this);
+        }
     }
 
     /**
@@ -101,17 +104,17 @@ public class GameEngineImpl implements GameEngine {
     /**
      * Remove player from game.
      *
-     * @param player - to remove from game
+     * @param selectedPlayer - to remove from game
      * @return boolean
      */
     @Override
-    public boolean removePlayer(Player player) {
+    public boolean removePlayer(Player selectedPlayer) {
         Iterator<Player> iterator = this.players.iterator();
 
         while (iterator.hasNext()) {
-            Player iteratorPlayer = iterator.next();
+            Player player = iterator.next();
 
-            if (player.getPlayerId().equals(iteratorPlayer.getPlayerId())) {
+            if (selectedPlayer.getPlayerId().equals(player.getPlayerId())) {
                 iterator.remove();
 
                 return true;
@@ -130,20 +133,27 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
-        this.gameEngineCallback = gameEngineCallback;
+        this.gameEngineCallbacks.add(gameEngineCallback);
     }
 
     /**
      * Remove the game engine callback.
      *
-     * @param gameEngineCallback - instance to be removed if no longer needed
+     * @param selectedGameEngineCallback - instance to be removed if no longer needed
      * @return boolean - true if the callback implementation has been removed
      */
     @Override
-    public boolean removeGameEngineCallback(GameEngineCallback gameEngineCallback) {
-        if (this.gameEngineCallback != null) {
-            this.gameEngineCallback = null;
-            return true;
+    public boolean removeGameEngineCallback(GameEngineCallback selectedGameEngineCallback) {
+        Iterator<GameEngineCallback> iterator = this.gameEngineCallbacks.iterator();
+
+        while (iterator.hasNext()) {
+            GameEngineCallback gameEngineCallback = iterator.next();
+
+            if (gameEngineCallback.equals(selectedGameEngineCallback)) {
+                iterator.remove();
+
+                return true;
+            }
         }
 
         return false;

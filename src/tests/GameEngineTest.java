@@ -232,4 +232,56 @@ class GameEngineTest {
         // Gamer wins at least once >:)
         assertTrue(player.getPoints() > (initialPoints - 300));
     }
+
+    @Test
+    void testGetGameCallbackImplCollection() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback firstGameEngineCallback = new GameEngineCallbackImpl();
+        GameEngineCallback secondGameEngineCallback = new GameEngineCallbackImpl();
+        Exception exception = null;
+
+        // Act
+        try {
+            gameEngine.addGameEngineCallback(firstGameEngineCallback);
+            gameEngine.addGameEngineCallback(secondGameEngineCallback);
+            gameEngine.spin(1, 100, 5);
+        } catch (Exception e) {
+            exception = e;
+        }
+
+        // Assert
+        assertNull(exception);
+    }
+
+    @Test
+    void testRemoveGameCallbackImplCollection() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback firstGameEngineCallback = new GameEngineCallbackImpl();
+        GameEngineCallback secondGameEngineCallback = new GameEngineCallbackImpl();
+        gameEngine.addGameEngineCallback(firstGameEngineCallback);
+        gameEngine.addGameEngineCallback(secondGameEngineCallback);
+
+        // Act
+        boolean removedGameCallback = gameEngine.removeGameEngineCallback(firstGameEngineCallback);
+
+        // Assert
+        assertTrue(removedGameCallback);
+    }
+
+    @Test
+    void testRemoveNonExistentGameCallbackImplCollection() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        GameEngineCallback firstGameEngineCallback = new GameEngineCallbackImpl();
+        GameEngineCallback secondGameEngineCallback = new GameEngineCallbackImpl();
+        gameEngine.addGameEngineCallback(secondGameEngineCallback);
+
+        // Act
+        boolean removedGameCallback = gameEngine.removeGameEngineCallback(firstGameEngineCallback);
+
+        // Assert
+        assertFalse(removedGameCallback);
+    }
 }
