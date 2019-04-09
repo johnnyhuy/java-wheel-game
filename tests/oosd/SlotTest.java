@@ -5,6 +5,8 @@ import model.enumeration.Color;
 import model.interfaces.Slot;
 import org.junit.jupiter.api.Test;
 
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SlotTest {
@@ -19,5 +21,18 @@ class SlotTest {
 
         // Assert
         assertEquals(expectedSlotString, slotString);
+    }
+
+    @Test
+    void testHashCodeGeneration() {
+        // Arrange
+        final Slot slot = new SlotImpl(0, Color.RED, 69);
+        final int expectedHash = Objects.hash(slot.getPosition(), slot.getColor().hashCode(), slot.getNumber());
+
+        // Act
+        int hashCode = slot.hashCode();
+
+        // Assert
+        assertEquals(expectedHash, hashCode);
     }
 }

@@ -3,6 +3,8 @@ package model;
 import model.enumeration.Color;
 import model.interfaces.Slot;
 
+import java.util.Objects;
+
 import static helper.StringHelper.capitalize;
 
 public class SlotImpl implements Slot {
@@ -65,5 +67,15 @@ public class SlotImpl implements Slot {
     @Override
     public boolean equals(Slot slot) {
         return this.color == slot.getColor() && this.number == slot.getNumber();
+    }
+
+    /**
+     * Generate a hash code out of the position, color and number.
+     *
+     * @return integer
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, color.hashCode(), number);
     }
 }
