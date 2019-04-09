@@ -1,4 +1,4 @@
-package oosd;
+package wheel;
 
 import model.GameEngineImpl;
 import model.SimplePlayer;

@@ -1,4 +1,4 @@
-package oosd;
+package wheel;
 
 import model.SimplePlayer;
 import model.enumeration.BetType;

@@ -1,4 +1,4 @@
-package oosd;
+package wheel;
 
 import model.SlotImpl;
 import model.enumeration.Color;
