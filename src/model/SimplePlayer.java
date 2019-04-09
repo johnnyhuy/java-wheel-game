@@ -84,6 +84,7 @@ public class SimplePlayer implements Player {
 
     /**
      * Set the players bet.
+     * Players cannot bet without $$$
      *
      * @param bet - the bet in points
      * @return boolean - true if bet has been set
@@ -128,8 +129,12 @@ public class SimplePlayer implements Player {
         this.betType = betType;
     }
 
+    /**
+     * Reset the players bet, as in setting the bet type and bet amount to 0.
+     */
     @Override
     public void resetBet() {
-
+        setBetType(null);
+        setBet(0);
     }
 }

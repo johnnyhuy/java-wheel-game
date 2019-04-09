@@ -1,7 +1,9 @@
 package wheel;
 
+import model.GameEngineImpl;
 import model.SimplePlayer;
 import model.enumeration.BetType;
+import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import org.junit.jupiter.api.Test;
 
@@ -122,6 +124,34 @@ class SimplePlayerTest {
     @Test
     void testPlayerSetBetInsufficientPoints() {
         // Arrange
+        final Player player = new SimplePlayer("1", "Dode", 100);
+
+        // Act
+        boolean bet = player.setBet(2000);
+
+        // Assert
+        assertFalse(bet);
+    }
+
+    @Test
+    void testGameEnginePlayerSetsBetThenResetsBet() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        final Player player = new SimplePlayer("1", "Dode", 100);
+        gameEngine.placeBet(player, 42, BetType.BLACK);
+
+        // Act
+        player.resetBet();
+
+        // Assert
+        assertEquals(0, player.getBet());
+        assertNull(player.getBetType());
+    }
+
+    @Test
+    void testPlayerSetsBetAndBetTypeThenResetsBet() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
         final Player player = new SimplePlayer("1", "Dode", 100);
 
         // Act
