@@ -47,13 +47,13 @@ public class GameEngineImpl implements GameEngine {
                 index = 0;
             }
 
-            delay = delay + delayIncrement;
-
             try {
                 TimeUnit.MILLISECONDS.sleep(delay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            delay = delay + delayIncrement;
         }
         while (delay <= finalDelay);
 
@@ -70,6 +70,10 @@ public class GameEngineImpl implements GameEngine {
     @Override
     public void calculateResult(Slot winningSlot) {
         for (Player player : this.players) {
+            if (player.getBetType() == null) {
+                continue;
+            }
+
             player.getBetType().applyWinLoss(player, winningSlot);
         }
     }

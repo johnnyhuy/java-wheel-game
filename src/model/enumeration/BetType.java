@@ -43,7 +43,7 @@ public enum BetType {
     ZEROS {
         @Override
         public void applyWinLoss(Player player, Slot winSlot) {
-            int slotSize = Slot.WHEEL_SIZE;
+            final int slotSize = Slot.WHEEL_SIZE;
             int currentPlayerPoints = player.getPoints();
             int bet = player.getBet();
 
