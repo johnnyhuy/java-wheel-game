@@ -1,4 +1,4 @@
-package tests;
+package oosd;
 
 import model.GameEngineImpl;
 import model.SimplePlayer;

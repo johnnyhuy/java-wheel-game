@@ -1,4 +1,4 @@
-package tests;
+package oosd;
 
 import model.SlotImpl;
 import model.enumeration.Color;
