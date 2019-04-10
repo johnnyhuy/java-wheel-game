@@ -63,7 +63,7 @@ public class SimpleTestClient
         // NOTE: result logging is done via GameEngineCallback.result()
         // after it calls GameEngine.calculateResult())
         // OutputTrace.txt was generated with these parameter values
-        gameEngine.spin(1, 500, 5);
+        gameEngine.spin(1, 100, 5);
 
         // TODO reset bets for next round if you were playing again
     }
