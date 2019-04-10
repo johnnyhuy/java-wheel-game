@@ -14,10 +14,10 @@ import model.enumeration.Color;
  * it should also provide the following constructor:
  *      <b>public SlotImpl(int position, Color color, int number)</b>
  * </pre>
- *
  * @author Caspar Ryan
  */
-public interface Slot {
+public interface Slot
+{
     /**
      * the size of the gaming wheel configured according to the assignment specification
      */
@@ -68,6 +68,7 @@ public interface Slot {
      * <b>NOTE:</b> if equals() is true then generated hashCode should also be equal
      *
      * @return - generated hash code (used by various JCF Collections)
+     *
      */
     @Override
     public abstract int hashCode();

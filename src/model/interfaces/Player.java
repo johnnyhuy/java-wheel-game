@@ -10,8 +10,10 @@ import model.enumeration.BetType;
  * <b>NOTE:</b> playerID is unique and if another player with same id is added it replaces the previous player</pre>
  *
  * @author Caspar Ryan
+ *
  */
-public interface Player {
+public interface Player
+{
     /**
      * @return - human readable player name
      */
@@ -23,6 +25,7 @@ public interface Player {
     public abstract void setPlayerName(String playerName);
 
     /**
+     *
      * @return - number of points from setPoints()
      */
     public abstract int getPoints();
@@ -69,7 +72,7 @@ public interface Player {
      * @return - a human readable String that lists the values of this Player<br>
      * <br>
      * e.g "Player: id=1, name=Come In Spinner, bet=100, betType=RED, points=900"<br>
-     * (see OutputTrace.txt)
+     *     (see OutputTrace.txt)
      */
     @Override
     public abstract String toString();

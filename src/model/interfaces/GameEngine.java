@@ -1,17 +1,19 @@
 package model.interfaces;
 
+import java.util.Collection;
+
 import model.enumeration.BetType;
 import view.interfaces.GameEngineCallback;
-
-import java.util.Collection;
 
 /**
  * Assignment interface for Further Programming providing main model functionality
  * for this Roulette style game
  *
  * @author Caspar Ryan
+ *
  */
-public interface GameEngine {
+public interface GameEngine
+{
     /**
      * <pre>
      * spin the gaming wheel progressing from the initialDelay to the finalDelay
@@ -48,8 +50,8 @@ public interface GameEngine {
     public abstract void calculateResult(Slot winningSlot);
 
     /**
-     * <b>NOTE:</b> playerID is unique and if another player with same id is added
-     * it replaces the previous player
+     *  <b>NOTE:</b> playerID is unique and if another player with same id is added
+     *  it replaces the previous player
      *
      * @param player - to add to game
      */
@@ -68,9 +70,10 @@ public interface GameEngine {
     public abstract boolean removePlayer(Player player);
 
     /**
-     * @param gameEngineCallback <pre> a client specific implementation of GameEngineCallback used to perform display updates etc.
-     *                           <b>NOTE:</b> you will use a different implementation of the GameEngineCallback
-     *                                 for the console (assignment 1) and GUI (assignment 2) versions</pre>
+     * @param gameEngineCallback
+     * <pre> a client specific implementation of GameEngineCallback used to perform display updates etc.
+     * <b>NOTE:</b> you will use a different implementation of the GameEngineCallback
+     *       for the console (assignment 1) and GUI (assignment 2) versions</pre>
      * @see view.interfaces.GameEngineCallback
      */
     public abstract void addGameEngineCallback(GameEngineCallback gameEngineCallback);
@@ -91,8 +94,8 @@ public interface GameEngine {
     /**
      * the implementation should make appropriate calls on the Player to place the bet and set bet type
      *
-     * @param player  - the Player who is placing the bet
-     * @param bet     - the bet in points
+     * @param player - the Player who is placing the bet
+     * @param bet - the bet in points
      * @param betType - the type of bet (red, black or either zero)
      * @return true - if bet is greater than 0 and player had sufficient points to place the bet
      */
