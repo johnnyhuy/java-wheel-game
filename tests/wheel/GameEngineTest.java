@@ -6,6 +6,7 @@ import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
@@ -226,11 +227,59 @@ class GameEngineTest {
         gameEngine.placeBet(player, 100, BetType.ZEROS);
 
         // Act
-        gameEngine.spin(1, 100, 5);
+        gameEngine.spin(1, 20, 5);
 
         // Assert
         // Gamer wins at least once >:)
         assertTrue(player.getPoints() > (initialPoints - 300));
+    }
+
+    @Test
+    void testNullPlayerDoesNotPlaceBet() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+
+        boolean placedBet = gameEngine.placeBet(null, 100, BetType.BLACK);
+
+        // Act
+        Executable run = () -> gameEngine.spin(1, 20, 5);
+
+        // Assert
+        assertDoesNotThrow(run);
+        assertFalse(placedBet);
+    }
+
+    @Test
+    void testGameEngineCannotAddNullPlayer() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+
+        // Act
+        Executable run = () -> {
+            gameEngine.addPlayer(null);
+            gameEngine.spin(1, 20, 5);
+        };
+
+        // Assert
+        assertDoesNotThrow(run);
+        assertEquals(0, gameEngine.getAllPlayers().size());
+    }
+
+    @Test
+    void testGameEngineCallbackCannotAddNullCallback() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        final Player player = new SimplePlayer("1", "Come In Spinner", 1000);
+
+        // Act
+        Executable run = () -> {
+            gameEngine.addGameEngineCallback(null);
+            gameEngine.addPlayer(player);
+            gameEngine.spin(1, 20, 5);
+        };
+
+        // Assert
+        assertDoesNotThrow(run);
     }
 
     @Test
@@ -245,7 +294,7 @@ class GameEngineTest {
         try {
             gameEngine.addGameEngineCallback(firstGameEngineCallback);
             gameEngine.addGameEngineCallback(secondGameEngineCallback);
-            gameEngine.spin(1, 100, 5);
+            gameEngine.spin(1, 20, 5);
         } catch (Exception e) {
             exception = e;
         }

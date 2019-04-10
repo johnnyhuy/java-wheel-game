@@ -85,6 +85,10 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void addPlayer(Player player) {
+        if (player == null) {
+            return;
+        }
+
         this.players.add(player);
     }
 
@@ -137,6 +141,10 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public void addGameEngineCallback(GameEngineCallback gameEngineCallback) {
+        if (gameEngineCallback == null) {
+            return;
+        }
+
         this.gameEngineCallbacks.add(gameEngineCallback);
     }
 
@@ -183,6 +191,10 @@ public class GameEngineImpl implements GameEngine {
      */
     @Override
     public boolean placeBet(Player player, int bet, BetType betType) {
+        if (player == null) {
+            return false;
+        }
+
         if (bet > 0 && player.setBet(bet)) {
             player.setBetType(betType);
             return true;
