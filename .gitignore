@@ -23,6 +23,6 @@ hs_err_pid*
 
 .idea
 
-classes/
-bin/
-*-bin/
+**/classes/
+**/bin/
+**/*-bin/
