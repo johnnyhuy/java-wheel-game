@@ -1,4 +1,4 @@
 package view;
 
-public class BetView {
+public class BetView extends View {
 }

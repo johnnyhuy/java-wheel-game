@@ -5,7 +5,6 @@ import model.interfaces.Slot;
 import view.interfaces.GameEngineCallback;
 
 public class GameEngineCallbackGUI implements GameEngineCallback {
-
 	@Override
 	public void nextSlot(Slot slot, GameEngine engine) {
 		// TODO Auto-generated method stub
@@ -17,5 +16,4 @@ public class GameEngineCallbackGUI implements GameEngineCallback {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
