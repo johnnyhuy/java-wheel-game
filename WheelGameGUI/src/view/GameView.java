@@ -27,7 +27,9 @@ public class GameView extends View {
         wheelPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(wheelPanel.getWidth(), wheelPanel.getHeight(), Image.SCALE_DEFAULT));
+                int iconSize = wheelPanel.getWidth() > wheelPanel.getHeight() ? wheelPanel.getHeight() : wheelPanel.getWidth();
+
+                Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
                 label.setIcon(newIcon);
             }
         });
