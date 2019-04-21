@@ -22,13 +22,27 @@ public class PlayerView extends View {
         this.playerController = playerController;
     }
 
+    public void list() {
+        frame = new JFrame();
+        frame.setSize(new Dimension(360, 450));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setLayout(new BorderLayout());
+
+        JComboBox players = new JComboBox();
+
+        for (Player player : gameEngine.getAllPlayers()) {
+            players.addItem(player.getPlayerName());
+        }
+    }
+
     public void create() {
         frame = new JFrame();
         frame.setSize(new Dimension(240, 300));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
         frame.setLayout(new BorderLayout());
 
         JPanel inputForm = new JPanel();

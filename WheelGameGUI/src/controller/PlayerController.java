@@ -17,6 +17,10 @@ public class PlayerController extends Controller {
         this.publisher = publisher;
     }
 
+    public void list() {
+        playerView.list();
+    }
+
     public void create() {
         playerView.create();
     }
