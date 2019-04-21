@@ -1,5 +1,5 @@
 package controller;
 
-public class BetController {
+public class BetController extends Controller {
 
 }

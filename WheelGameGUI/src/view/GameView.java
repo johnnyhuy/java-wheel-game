@@ -1,5 +1,7 @@
 package view;
 
+import controller.GameController;
+import controller.PlayerController;
 import view.component.Padding;
 import view.component.ViewMenuBar;
 
@@ -11,12 +13,21 @@ import java.net.URL;
 import java.util.Objects;
 
 public class GameView extends View {
-    public GameView() {
-        setSize(640, 480);
-        setJMenuBar(new ViewMenuBar(this));
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    private GameController gameController;
+    private PlayerController playerController;
+
+    public GameView(GameController gameController, PlayerController playerController) {
+        this.gameController = gameController;
+        this.playerController = playerController;
+    }
+
+    public void start() {
+        JFrame frame = new JFrame();
+        frame.setSize(640, 480);
+        frame.setJMenuBar(new ViewMenuBar(this, playerController));
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
 
         URL location = getClass().getClassLoader().getResource("resources/images/Basic_roulette_wheel_1024x1024.png");
         final ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
@@ -43,8 +54,8 @@ public class GameView extends View {
         summaryPanel.add(summaryTitle);
 
         BorderLayout layout = new BorderLayout();
-        setLayout(layout);
-        add(summaryPanel, BorderLayout.LINE_END);
-        add(wheelPanel, BorderLayout.CENTER);
+        frame.setLayout(layout);
+        frame.add(summaryPanel, BorderLayout.LINE_END);
+        frame.add(wheelPanel, BorderLayout.CENTER);
     }
 }
