@@ -62,7 +62,7 @@ public class ListPlayerView extends SubscriptionView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new DeletePlayerView(gameEngine).render();
+                        new DeletePlayerView(gameEngine, playerController).render();
                     }
                 });
             }

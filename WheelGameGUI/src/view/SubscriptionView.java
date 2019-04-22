@@ -15,7 +15,7 @@ public abstract class SubscriptionView implements View, Flow.Subscriber<Integer>
         subscription.request(1);
     }
 
-    public Flow.Subscription getSubscription() {
+    protected Flow.Subscription getSubscription() {
         return this.subscription;
     }
 

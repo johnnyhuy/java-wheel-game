@@ -46,4 +46,9 @@ public class PlayerController extends Controller {
         gameEngine.addPlayer(player);
         publisher.submit(1);
     }
+
+    public void destroy(Player player) {
+        gameEngine.removePlayer(player);
+        publisher.submit(1);
+    }
 }
