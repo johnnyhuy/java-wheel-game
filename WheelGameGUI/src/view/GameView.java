@@ -13,13 +13,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.net.URL;
 import java.util.Objects;
-import java.util.concurrent.Flow;
 
 public class GameView extends SubscriptionView {
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
-    private Flow.Subscription subscription;
     private JFrame frame;
     private DefaultTableModel dtm;
     private JPanel summaryPanel;
@@ -45,7 +43,7 @@ public class GameView extends SubscriptionView {
         final ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
         JLabel label = new JLabel();
 
-        final int wheelPadding = 20;
+        final int wheelPadding = 40;
         JPanel wheelPanel = new JPanel();
         wheelPanel.add(label);
         wheelPanel.setBorder(BorderFactory.createEmptyBorder(wheelPadding, wheelPadding, wheelPadding, wheelPadding));
@@ -72,23 +70,22 @@ public class GameView extends SubscriptionView {
         JLabel summaryTitle = new JLabel("Sexy wheel game");
         summaryPanel.add(summaryTitle);
 
-        JTable table = new JTable();
+        JTable playersTable = new JTable();
         dtm = new DefaultTableModel(0, 0);
         dtm.addColumn("Name");
         dtm.addColumn("Points");
-        table.setModel(dtm);
+        playersTable.setModel(dtm);
 
         for (Player player : gameEngine.getAllPlayers()) {
-            dtm.addRow(new Object[]{player.getPlayerName(), player.getPoints()});
+            Object[] row = new Object[]{
+                player.getPlayerName(),
+                player.getPoints()
+            };
+
+            dtm.addRow(row);
         }
 
-        summaryPanel.add(table);
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
-        subscription.request(1);
+        summaryPanel.add(playersTable);
     }
 
     @Override
@@ -97,7 +94,6 @@ public class GameView extends SubscriptionView {
         paintSummaryPanel();
         summaryPanel.revalidate();
         summaryPanel.repaint();
-
-        subscription.request(1);
+        getSubscription().request(1);
     }
 }

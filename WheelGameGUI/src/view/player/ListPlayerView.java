@@ -11,11 +11,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.concurrent.Flow;
 
 public class ListPlayerView extends SubscriptionView {
     private final GameEngine gameEngine;
     private PlayerController playerController;
+    private JScrollPane scrollPane;
+    private JTable table;
 
     public ListPlayerView(GameEngine gameEngine, PlayerController playerController) {
         this.gameEngine = gameEngine;
@@ -31,25 +32,8 @@ public class ListPlayerView extends SubscriptionView {
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
 
-        JScrollPane scrollPane = new JScrollPane();
-        JTable table = new JTable();
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
-        dtm.addColumn("ID");
-        dtm.addColumn("Name");
-        dtm.addColumn("Points");
-        table.setModel(dtm);
-
-        for (Player player : gameEngine.getAllPlayers()) {
-            Object[] row = new Object[]{
-                player.getPlayerId(),
-                player.getPlayerName(),
-                player.getPoints()
-            };
-
-            dtm.addRow(row);
-        }
-
-        scrollPane.setViewportView(table);
+        scrollPane = new JScrollPane();
+        paintPlayerTable();
         scrollPane.setPreferredSize(new Dimension(300, frame.getHeight()));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -100,13 +84,31 @@ public class ListPlayerView extends SubscriptionView {
         actionButtons.add(createButton);
     }
 
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
+    private void paintPlayerTable() {
+        table = new JTable();
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.addColumn("ID");
+        dtm.addColumn("Name");
+        dtm.addColumn("Points");
+        table.setModel(dtm);
 
+        for (Player player : gameEngine.getAllPlayers()) {
+            Object[] row = new Object[]{
+                player.getPlayerId(),
+                player.getPlayerName(),
+                player.getPoints()
+            };
+
+            dtm.addRow(row);
+        }
+
+        scrollPane.setViewportView(table);
     }
 
     @Override
     public void onNext(Integer item) {
-
+        table.removeAll();
+        paintPlayerTable();
+        getSubscription().request(1);
     }
 }

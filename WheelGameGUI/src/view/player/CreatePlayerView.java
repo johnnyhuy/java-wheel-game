@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.UUID;
-import java.util.concurrent.Flow;
 
 public class CreatePlayerView extends SubscriptionView {
     private GameEngine gameEngine;
@@ -95,11 +94,6 @@ public class CreatePlayerView extends SubscriptionView {
             }
         });
         actionButtons.add(createButton);
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-
     }
 
     @Override

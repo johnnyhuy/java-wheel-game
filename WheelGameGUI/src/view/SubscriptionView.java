@@ -7,6 +7,18 @@ import java.util.concurrent.Flow;
  * Since some view may not need this feature.
  */
 public abstract class SubscriptionView implements View, Flow.Subscriber<Integer> {
+    private Flow.Subscription subscription;
+
+    @Override
+    public void onSubscribe(Flow.Subscription subscription) {
+        this.subscription = subscription;
+        subscription.request(1);
+    }
+
+    public Flow.Subscription getSubscription() {
+        return this.subscription;
+    }
+
     @Override
     public void onError(Throwable throwable) {
 

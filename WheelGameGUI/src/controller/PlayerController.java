@@ -6,6 +6,7 @@ import view.SubscriptionView;
 import view.player.CreatePlayerView;
 import view.player.ListPlayerView;
 
+import javax.swing.*;
 import java.util.concurrent.SubmissionPublisher;
 
 public class PlayerController extends Controller {
@@ -20,13 +21,25 @@ public class PlayerController extends Controller {
     public void list() {
         SubscriptionView view = new ListPlayerView(gameEngine, this);
         publisher.subscribe(view);
-        view.render();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.render();
+            }
+        });
     }
 
     public void create() {
         SubscriptionView view = new CreatePlayerView(gameEngine, this);
         publisher.subscribe(view);
-        view.render();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.render();
+            }
+        });
     }
 
     public void store(Player player) {

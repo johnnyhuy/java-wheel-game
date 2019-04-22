@@ -6,7 +6,6 @@ import view.SubscriptionView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.Flow;
 
 public class DeletePlayerView extends SubscriptionView {
     private final GameEngine gameEngine;
@@ -31,15 +30,12 @@ public class DeletePlayerView extends SubscriptionView {
         JComboBox<String> playersCombo = new JComboBox<>();
         playersCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
         playersCombo.setMaximumSize(new Dimension(560, 30));
+
         for (Player player : gameEngine.getAllPlayers()) {
             playersCombo.addItem(player.getPlayerName());
         }
+
         frame.add(playersCombo);
-    }
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-
     }
 
     @Override
