@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.UUID;
+import java.util.concurrent.Flow;
 
-public class PlayerView extends View {
-    private JFrame frame;
+public class PlayerView extends View implements Flow.Subscriber<Integer> {
     private GameEngine gameEngine;
     private PlayerController playerController;
 
@@ -24,7 +24,7 @@ public class PlayerView extends View {
     }
 
     public void list() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setSize(new Dimension(580, 450));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -45,15 +45,65 @@ public class PlayerView extends View {
         scrollPane.setViewportView(table);
         scrollPane.setPreferredSize(new Dimension(300, frame.getHeight()));
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        frame.add(scrollPane, BorderLayout.WEST);
+        frame.add(scrollPane, BorderLayout.CENTER);
 
-        JPanel sidebar = new JPanel();
-        sidebar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BorderLayout());
+        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));
+        frame.add(southPanel, BorderLayout.SOUTH);
+
+        JPanel actionButtons = new JPanel();
+        southPanel.add(actionButtons, BorderLayout.EAST);
+
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
+        actionButtons.add(cancelButton);
+
+        JButton removeButton = new JButton("Remove");
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        delete();
+                    }
+                });
+            }
+        });
+        actionButtons.add(removeButton);
+
+        JButton createButton = new JButton("Create");
+        createButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        create();
+                    }
+                });
+            }
+        });
+        actionButtons.add(createButton);
+    }
+
+    public void delete() {
+        JFrame frame = new JFrame();
+        frame.setSize(new Dimension(240, 300));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setLayout(new BorderLayout());
 
         JLabel playerNameLabel = new JLabel("Player");
         playerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
-        sidebar.add(playerNameLabel);
+        frame.add(playerNameLabel);
 
         JComboBox<String> playersCombo = new JComboBox<>();
         playersCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -61,17 +111,13 @@ public class PlayerView extends View {
         for (Player player : gameEngine.getAllPlayers()) {
             playersCombo.addItem(player.getPlayerName());
         }
-        sidebar.add(playersCombo);
+        frame.add(playersCombo);
 
-        frame.add(sidebar);
-    }
-
-    public void delete() {
-
+        frame.add(frame);
     }
 
     public void create() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setSize(new Dimension(240, 300));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -141,5 +187,25 @@ public class PlayerView extends View {
             }
         });
         actionButtons.add(createButton);
+    }
+
+    @Override
+    public void onSubscribe(Flow.Subscription subscription) {
+
+    }
+
+    @Override
+    public void onNext(Integer item) {
+
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }

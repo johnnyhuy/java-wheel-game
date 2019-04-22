@@ -14,7 +14,8 @@ public class PlayerController extends Controller {
     public PlayerController(GameEngine gameEngine, SubmissionPublisher<Integer> publisher) {
         this.gameEngine = gameEngine;
         this.playerView = new PlayerView(gameEngine, this);
-        this.publisher = publisher;
+
+        publisher.subscribe(playerView);
     }
 
     public void list() {
