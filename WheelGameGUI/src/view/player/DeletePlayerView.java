@@ -35,8 +35,6 @@ public class DeletePlayerView extends SubscriptionView {
             playersCombo.addItem(player.getPlayerName());
         }
         frame.add(playersCombo);
-
-        frame.add(frame);
     }
 
     @Override

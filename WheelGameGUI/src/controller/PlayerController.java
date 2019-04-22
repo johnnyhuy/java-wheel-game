@@ -18,7 +18,7 @@ public class PlayerController extends Controller {
     }
 
     public void list() {
-        SubscriptionView view = new ListPlayerView(gameEngine);
+        SubscriptionView view = new ListPlayerView(gameEngine, this);
         publisher.subscribe(view);
         view.render();
     }

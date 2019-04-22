@@ -8,6 +8,7 @@ import model.interfaces.GameEngine;
 import model.interfaces.Player;
 
 import javax.swing.*;
+import java.util.UUID;
 import java.util.concurrent.SubmissionPublisher;
 
 public class WheelGameGUI {
@@ -18,9 +19,9 @@ public class WheelGameGUI {
         final GameController gameController = new GameController(gameEngine, publisher, playerController);
 
         Player[] players = new Player[]{
-            new SimplePlayer("1", "Come In Spinner", 1000),
-            new SimplePlayer("2", "The Loser", 750),
-            new SimplePlayer("3", "The Dabbler", 500)
+            new SimplePlayer(UUID.randomUUID().toString(), "Come In Spinner", 1000),
+            new SimplePlayer(UUID.randomUUID().toString(), "The Loser", 750),
+            new SimplePlayer(UUID.randomUUID().toString(), "The Dabbler", 500)
         };
 
         for (Player player : players) {

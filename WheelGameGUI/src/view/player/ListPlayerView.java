@@ -1,5 +1,6 @@
 package view.player;
 
+import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
@@ -14,9 +15,11 @@ import java.util.concurrent.Flow;
 
 public class ListPlayerView extends SubscriptionView {
     private final GameEngine gameEngine;
+    private PlayerController playerController;
 
-    public ListPlayerView(GameEngine gameEngine) {
+    public ListPlayerView(GameEngine gameEngine, PlayerController playerController) {
         this.gameEngine = gameEngine;
+        this.playerController = playerController;
     }
 
     @Override
@@ -31,12 +34,19 @@ public class ListPlayerView extends SubscriptionView {
         JScrollPane scrollPane = new JScrollPane();
         JTable table = new JTable();
         DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.addColumn("ID");
         dtm.addColumn("Name");
         dtm.addColumn("Points");
         table.setModel(dtm);
 
         for (Player player : gameEngine.getAllPlayers()) {
-            dtm.addRow(new Object[]{player.getPlayerName(), player.getPoints()});
+            Object[] row = new Object[]{
+                player.getPlayerId(),
+                player.getPlayerName(),
+                player.getPoints()
+            };
+
+            dtm.addRow(row);
         }
 
         scrollPane.setViewportView(table);
@@ -82,7 +92,7 @@ public class ListPlayerView extends SubscriptionView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new DeletePlayerView(gameEngine).render();
+                        new CreatePlayerView(gameEngine, playerController).render();
                     }
                 });
             }
