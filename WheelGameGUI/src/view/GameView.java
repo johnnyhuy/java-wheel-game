@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.concurrent.Flow;
 
-public class GameView extends View implements Flow.Subscriber<Integer> {
+public class GameView extends SubscriptionView {
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
@@ -30,7 +30,8 @@ public class GameView extends View implements Flow.Subscriber<Integer> {
         this.playerController = playerController;
     }
 
-    public void start() {
+    @Override
+    public void render() {
         frame = new JFrame();
         frame.setSize(780, 600);
         frame.setJMenuBar(new ViewMenuBar(this, playerController));
@@ -98,13 +99,5 @@ public class GameView extends View implements Flow.Subscriber<Integer> {
         summaryPanel.repaint();
 
         subscription.request(1);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-    }
-
-    @Override
-    public void onComplete() {
     }
 }

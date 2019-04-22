@@ -2,28 +2,31 @@ package controller;
 
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.PlayerView;
+import view.SubscriptionView;
+import view.player.CreatePlayerView;
+import view.player.ListPlayerView;
 
 import java.util.concurrent.SubmissionPublisher;
 
 public class PlayerController extends Controller {
-    private final PlayerView playerView;
     private SubmissionPublisher<Integer> publisher;
     private GameEngine gameEngine;
 
     public PlayerController(GameEngine gameEngine, SubmissionPublisher<Integer> publisher) {
         this.gameEngine = gameEngine;
-        this.playerView = new PlayerView(gameEngine, this);
-
-        publisher.subscribe(playerView);
+        this.publisher = publisher;
     }
 
     public void list() {
-        playerView.list();
+        SubscriptionView view = new ListPlayerView(gameEngine);
+        publisher.subscribe(view);
+        view.render();
     }
 
     public void create() {
-        playerView.create();
+        SubscriptionView view = new CreatePlayerView(gameEngine, this);
+        publisher.subscribe(view);
+        view.render();
     }
 
     public void store(Player player) {

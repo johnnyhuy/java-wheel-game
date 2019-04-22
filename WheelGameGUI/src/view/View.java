@@ -1,4 +1,8 @@
 package view;
 
-public abstract class View {
+/**
+ * General interface that all views should use.
+ */
+public interface View {
+    void render();
 }
