@@ -6,6 +6,7 @@ import model.interfaces.GameEngine;
 import model.interfaces.Player;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,17 +25,49 @@ public class PlayerView extends View {
 
     public void list() {
         frame = new JFrame();
-        frame.setSize(new Dimension(360, 450));
+        frame.setSize(new Dimension(580, 450));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
 
-        JComboBox players = new JComboBox();
+        JScrollPane scrollPane = new JScrollPane();
+        JTable table = new JTable();
+        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+        dtm.addColumn("Name");
+        dtm.addColumn("Points");
+        table.setModel(dtm);
 
         for (Player player : gameEngine.getAllPlayers()) {
-            players.addItem(player.getPlayerName());
+            dtm.addRow(new Object[]{player.getPlayerName(), player.getPoints()});
         }
+
+        scrollPane.setViewportView(table);
+        scrollPane.setPreferredSize(new Dimension(300, frame.getHeight()));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        frame.add(scrollPane, BorderLayout.WEST);
+
+        JPanel sidebar = new JPanel();
+        sidebar.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
+
+        JLabel playerNameLabel = new JLabel("Player");
+        playerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        sidebar.add(playerNameLabel);
+
+        JComboBox<String> playersCombo = new JComboBox<>();
+        playersCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        playersCombo.setMaximumSize(new Dimension(560, 30));
+        for (Player player : gameEngine.getAllPlayers()) {
+            playersCombo.addItem(player.getPlayerName());
+        }
+        sidebar.add(playersCombo);
+
+        frame.add(sidebar);
+    }
+
+    public void delete() {
+
     }
 
     public void create() {

@@ -16,6 +16,15 @@ public class ViewMenuBar extends JMenuBar {
         gameMenu.setMnemonic(KeyEvent.VK_I);
         this.add(gameMenu);
 
+        JMenuItem listPlayer = new JMenuItem("Players", KeyEvent.VK_P);
+        listPlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playerController.list();
+            }
+        });
+        gameMenu.add(listPlayer);
+
         JMenuItem newPlayer = new JMenuItem("New Player", KeyEvent.VK_N);
         newPlayer.addActionListener(new ActionListener() {
             @Override
@@ -24,7 +33,6 @@ public class ViewMenuBar extends JMenuBar {
             }
         });
         newPlayer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
-
         gameMenu.add(newPlayer);
     }
 }

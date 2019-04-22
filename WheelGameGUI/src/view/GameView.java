@@ -4,7 +4,6 @@ import controller.GameController;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.component.Padding;
 import view.component.ViewMenuBar;
 
 import javax.swing.*;
@@ -33,25 +32,26 @@ public class GameView extends View implements Flow.Subscriber<Integer> {
 
     public void start() {
         frame = new JFrame();
-        frame.setSize(720, 600);
+        frame.setSize(780, 600);
         frame.setJMenuBar(new ViewMenuBar(this, playerController));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
 
-        URL location = getClass().getClassLoader().getResource("resources/images/Basic_roulette_wheel_1024x1024.png");
+        final String wheelFileLocation = "resources/images/Basic_roulette_wheel_1024x1024.png";
+        final URL location = getClass().getClassLoader().getResource(wheelFileLocation);
         final ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
         JLabel label = new JLabel();
 
+        final int wheelPadding = 20;
         JPanel wheelPanel = new JPanel();
-        Padding padding = new Padding(20);
         wheelPanel.add(label);
-        wheelPanel.setBorder(padding);
+        wheelPanel.setBorder(BorderFactory.createEmptyBorder(wheelPadding, wheelPadding, wheelPadding, wheelPadding));
         wheelPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int iconSize = wheelPanel.getWidth() > wheelPanel.getHeight() ? wheelPanel.getHeight() - padding.getTotalSize() : wheelPanel.getWidth() - padding.getTotalSize();
+                int iconSize = wheelPanel.getWidth() > wheelPanel.getHeight() ? wheelPanel.getHeight() - (wheelPadding * 2) : wheelPanel.getWidth() - (wheelPadding * 2);
                 Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
                 label.setIcon(newIcon);
             }
@@ -62,7 +62,7 @@ public class GameView extends View implements Flow.Subscriber<Integer> {
         summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         summaryPanel.setPreferredSize(new Dimension(240, wheelPanel.getHeight()));
         summaryPanel.setBackground(Color.lightGray);
-        frame.add(summaryPanel, BorderLayout.LINE_END);
+        frame.add(summaryPanel, BorderLayout.EAST);
 
         paintSummaryPanel();
     }
