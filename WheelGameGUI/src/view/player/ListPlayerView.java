@@ -59,12 +59,7 @@ public class ListPlayerView extends SubscriptionView {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new DeletePlayerView(gameEngine, playerController).render();
-                    }
-                });
+                playerController.remove();
             }
         });
         actionButtons.add(removeButton);
@@ -73,12 +68,7 @@ public class ListPlayerView extends SubscriptionView {
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new CreatePlayerView(gameEngine, playerController).render();
-                    }
-                });
+                playerController.create();
             }
         });
         actionButtons.add(createButton);

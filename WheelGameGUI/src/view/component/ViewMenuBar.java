@@ -34,5 +34,20 @@ public class ViewMenuBar extends JMenuBar {
         });
         newPlayer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
         gameMenu.add(newPlayer);
+
+        JMenuItem removePlayer = new JMenuItem("Remove Player", KeyEvent.VK_N);
+        removePlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        playerController.remove();
+                    }
+                });
+            }
+        });
+        removePlayer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+        gameMenu.add(removePlayer);
     }
 }
