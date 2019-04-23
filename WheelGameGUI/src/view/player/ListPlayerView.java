@@ -6,6 +6,8 @@ import model.interfaces.Player;
 import view.SubscriptionView;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,11 +78,32 @@ public class ListPlayerView extends SubscriptionView {
 
     private void paintPlayerTable() {
         table = new JTable();
-        DefaultTableModel dtm = new DefaultTableModel(0, 0);
+
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
+            Border padding = BorderFactory.createEmptyBorder(0, 10, 0, 10);
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBorder(BorderFactory.createCompoundBorder(getBorder(), padding));
+                return this;
+            }
+        };
+
+        table.getTableHeader().setDefaultRenderer(renderer);
+        table.setDefaultRenderer(Object.class, renderer);
+        table.getTableHeader().setPreferredSize(new Dimension(0, 40));
+        DefaultTableModel dtm = new DefaultTableModel(0, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         dtm.addColumn("ID");
         dtm.addColumn("Name");
         dtm.addColumn("Points");
         table.setModel(dtm);
+        table.setRowHeight(40);
 
         for (Player player : gameEngine.getAllPlayers()) {
             Object[] row = new Object[]{
