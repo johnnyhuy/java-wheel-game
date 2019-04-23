@@ -33,7 +33,7 @@ public class DeletePlayerView extends SubscriptionView {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         frame.add(panel);
 
         JPanel northPanel = new JPanel();

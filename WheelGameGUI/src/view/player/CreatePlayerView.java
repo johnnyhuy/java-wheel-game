@@ -29,47 +29,31 @@ public class CreatePlayerView extends SubscriptionView {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setLayout(new BorderLayout());
 
         JPanel inputForm = new JPanel();
-        inputForm.setSize(300, 250);
-        inputForm.setLayout(new GridBagLayout());
+        inputForm.setLayout(new BoxLayout(inputForm, BoxLayout.Y_AXIS));
+//        inputForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         frame.add(inputForm, BorderLayout.NORTH);
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = gbc.weighty = 1.0;
-
         JLabel playerNameLabel = new JLabel("Player Name");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        inputForm.add(playerNameLabel, gbc);
+//        inputForm.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        inputForm.add(playerNameLabel);
 
         JTextField playerName = new JTextField();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(0, 10, 10, 10);
-        playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        inputForm.add(playerName, gbc);
+//        playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        inputForm.add(playerName);
 
         JLabel playerPointsLabel = new JLabel("Player Points");
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        inputForm.add(playerPointsLabel, gbc);
+        playerPointsLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        inputForm.add(playerPointsLabel);
 
         JTextField playerPoints = new JTextField();
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        gbc.insets = new Insets(0, 10, 10, 10);
         playerPoints.setPreferredSize(new Dimension(inputForm.getWidth(), 40));
         playerPoints.setBorder(BorderFactory.createCompoundBorder(playerPoints.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        inputForm.add(playerPoints, gbc);
+//        inputForm.add(playerPoints);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
-        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 5));
         frame.add(southPanel, BorderLayout.SOUTH);
 
         JPanel actionButtons = new JPanel();

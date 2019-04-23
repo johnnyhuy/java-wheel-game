@@ -37,7 +37,7 @@ public class ListPlayerView extends SubscriptionView {
         scrollPane = new JScrollPane();
         paintPlayerTable();
         scrollPane.setPreferredSize(new Dimension(300, frame.getHeight()));
-        scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         scrollPane.setBackground(null);
         frame.add(scrollPane, BorderLayout.CENTER);
 
