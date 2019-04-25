@@ -3,45 +3,45 @@
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
 	<lib name="Validator.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/Validator.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/Validator.jar!/"/>
 	</lib>
 	<lib name="junit.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/junit.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/junit.jar!/"/>
 	</lib>
 	<lib name="org.apiguardian_1.0.0.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.apiguardian_1.0.0.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.apiguardian_1.0.0.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.hamcrest.core_1.3.0.v20180420-1519.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.hamcrest.core_1.3.0.v20180420-1519.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.hamcrest.core_1.3.0.v20180420-1519.jar!/"/>
 	</lib>
 	<lib name="org.junit.jupiter.api_5.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.jupiter.api_5.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.jupiter.api_5.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.jupiter.engine_5.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.jupiter.engine_5.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.jupiter.engine_5.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.jupiter.migrationsupport_5.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.jupiter.migrationsupport_5.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.jupiter.migrationsupport_5.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.jupiter.params_5.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.jupiter.params_5.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.jupiter.params_5.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.platform.commons_1.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.platform.commons_1.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.platform.commons_1.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.platform.engine_1.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.platform.engine_1.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.platform.engine_1.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.platform.launcher_1.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.platform.launcher_1.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.platform.launcher_1.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.platform.suite.api_1.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.platform.suite.api_1.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.platform.suite.api_1.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.junit.vintage.engine_5.3.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.junit.vintage.engine_5.3.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.junit.vintage.engine_5.3.1.v20181005-1442.jar!/"/>
 	</lib>
 	<lib name="org.opentest4j_1.1.1.v20181005-1442.jar" scope="COMPILE">
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/WheelGameImplementation/lib/org.opentest4j_1.1.1.v20181005-1442.jar!/"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/org.opentest4j_1.1.1.v20181005-1442.jar!/"/>
 	</lib>
 </component>
