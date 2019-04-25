@@ -26,7 +26,7 @@ public class CreatePlayerView extends SubscriptionView {
     @Override
     public void render() {
         JFrame frame = new JFrame();
-        frame.setSize(new Dimension(240, 300));
+        frame.setSize(new Dimension(360, 300));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -52,10 +52,12 @@ public class CreatePlayerView extends SubscriptionView {
         inputForm.add(playerPoints);
 
         JPanel southPanel = new JPanel();
+        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 15));
         southPanel.setLayout(new BorderLayout());
         frame.add(southPanel, BorderLayout.SOUTH);
 
         JPanel actionButtons = new JPanel();
+        actionButtons.setLayout(new FlowLayout());
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
