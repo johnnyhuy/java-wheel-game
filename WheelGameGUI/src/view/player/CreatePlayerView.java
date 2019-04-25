@@ -5,6 +5,7 @@ import model.SimplePlayer;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
+import view.component.LabelPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,26 +36,20 @@ public class CreatePlayerView extends SubscriptionView {
         inputForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         frame.add(inputForm, BorderLayout.NORTH);
 
-        JPanel topLabel = new JPanel();
-        JLabel playerNameLabel = new JLabel("Player Name");
-        topLabel.setLayout(new BorderLayout());
-        topLabel.add(playerNameLabel);
-        playerNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        topLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
-        inputForm.add(topLabel);
+        LabelPanel playerNameLabel = new LabelPanel("Player Name");
+        inputForm.add(playerNameLabel);
 
         JTextField playerName = new JTextField();
         playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         inputForm.add(playerName);
 
-        JLabel playerPointsLabel = new JLabel("Player Points");
-        playerPointsLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        LabelPanel playerPointsLabel = new LabelPanel("Player Points");
+        playerPointsLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         inputForm.add(playerPointsLabel);
 
         JTextField playerPoints = new JTextField();
-        playerPoints.setPreferredSize(new Dimension(inputForm.getWidth(), 40));
         playerPoints.setBorder(BorderFactory.createCompoundBorder(playerPoints.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-//        inputForm.add(playerPoints);
+        inputForm.add(playerPoints);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
