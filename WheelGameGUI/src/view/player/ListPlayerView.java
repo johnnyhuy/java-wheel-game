@@ -4,15 +4,15 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
+import view.listener.CreatePlayerListener;
+import view.listener.DeletePlayerListener;
+import view.listener.WindowCloseListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 public class ListPlayerView extends SubscriptionView {
     private final GameEngine gameEngine;
@@ -33,6 +33,7 @@ public class ListPlayerView extends SubscriptionView {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
+        frame.setTitle("List Players");
 
         scrollPane = new JScrollPane();
         paintPlayerTable();
@@ -50,30 +51,15 @@ public class ListPlayerView extends SubscriptionView {
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        cancelButton.addActionListener(new WindowCloseListener(frame));
         actionButtons.add(cancelButton);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerController.remove();
-            }
-        });
+        removeButton.addActionListener(new DeletePlayerListener(playerController));
         actionButtons.add(removeButton);
 
         JButton createButton = new JButton("Create");
-        createButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerController.create();
-            }
-        });
+        createButton.addActionListener(new CreatePlayerListener(playerController));
         actionButtons.add(createButton);
     }
 

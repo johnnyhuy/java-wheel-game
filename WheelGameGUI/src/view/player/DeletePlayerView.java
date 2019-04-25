@@ -4,12 +4,11 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
+import view.listener.DestroyPlayerListener;
+import view.listener.WindowCloseListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
 import static helper.CollectionHelper.toList;
@@ -30,6 +29,7 @@ public class DeletePlayerView extends SubscriptionView {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setTitle("Delete Player");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -63,22 +63,11 @@ public class DeletePlayerView extends SubscriptionView {
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        cancelButton.addActionListener(new WindowCloseListener(frame));
         actionButtons.add(cancelButton);
 
         JButton removeButton = new JButton("Remove");
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerController.destroy(players.get(playersCombo.getSelectedIndex()));
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        removeButton.addActionListener(new DestroyPlayerListener(frame, playerController, players.get(playersCombo.getSelectedIndex())));
         actionButtons.add(removeButton);
     }
 

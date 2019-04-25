@@ -43,7 +43,7 @@ public class PlayerController extends Controller {
         });
     }
 
-    public void remove() {
+    public void delete() {
         SubscriptionView view = new DeletePlayerView(gameEngine, this);
         publisher.subscribe(view);
 
