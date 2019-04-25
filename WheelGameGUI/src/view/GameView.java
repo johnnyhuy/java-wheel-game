@@ -4,7 +4,7 @@ import controller.GameController;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.component.ViewMenuBar;
+import view.component.MenuBar;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +32,7 @@ public class GameView extends SubscriptionView {
     public void render() {
         frame = new JFrame();
         frame.setSize(780, 600);
-        frame.setJMenuBar(new ViewMenuBar(this, playerController));
+        frame.setJMenuBar(new MenuBar(this, playerController));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

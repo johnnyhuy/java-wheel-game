@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-public class ViewMenuBar extends JMenuBar {
-    public ViewMenuBar(GameView gameView, PlayerController playerController) {
+public class MenuBar extends JMenuBar {
+    public MenuBar(GameView gameView, PlayerController playerController) {
         JMenu gameMenu = new JMenu("Game");
 
         gameMenu.setMnemonic(KeyEvent.VK_I);

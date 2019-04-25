@@ -32,15 +32,19 @@ public class CreatePlayerView extends SubscriptionView {
 
         JPanel inputForm = new JPanel();
         inputForm.setLayout(new BoxLayout(inputForm, BoxLayout.Y_AXIS));
-//        inputForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
+        inputForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         frame.add(inputForm, BorderLayout.NORTH);
 
+        JPanel topLabel = new JPanel();
         JLabel playerNameLabel = new JLabel("Player Name");
-//        inputForm.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
-        inputForm.add(playerNameLabel);
+        topLabel.setLayout(new BorderLayout());
+        topLabel.add(playerNameLabel);
+        playerNameLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        topLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        inputForm.add(topLabel);
 
         JTextField playerName = new JTextField();
-//        playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         inputForm.add(playerName);
 
         JLabel playerPointsLabel = new JLabel("Player Points");
