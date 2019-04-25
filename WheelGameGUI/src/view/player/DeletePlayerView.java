@@ -26,27 +26,26 @@ public class DeletePlayerView extends SubscriptionView {
     @Override
     public void render() {
         JFrame frame = new JFrame();
-        frame.setSize(new Dimension(360, 150));
+        frame.setSize(new Dimension(360, 200));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         frame.add(panel);
 
         JPanel northPanel = new JPanel();
+        northPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
         panel.add(northPanel, BorderLayout.NORTH);
 
         JLabel playerNameLabel = new JLabel("Player");
-        playerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        playerNameLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         northPanel.add(playerNameLabel);
 
         JComboBox<String> playersCombo = new JComboBox<>();
         playersCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
-        playersCombo.setMaximumSize(new Dimension(560, 30));
         northPanel.add(playersCombo);
 
         List<Player> players = toList(gameEngine.getAllPlayers());
@@ -56,9 +55,11 @@ public class DeletePlayerView extends SubscriptionView {
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
+        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 20, 10));
         panel.add(southPanel, BorderLayout.SOUTH);
 
         JPanel actionButtons = new JPanel();
+        actionButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");

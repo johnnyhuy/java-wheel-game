@@ -26,10 +26,11 @@ public class CreatePlayerView extends SubscriptionView {
     @Override
     public void render() {
         JFrame frame = new JFrame();
-        frame.setSize(new Dimension(360, 300));
+        frame.setSize(new Dimension(360, 250));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setTitle("Create Player");
 
         JPanel inputForm = new JPanel();
         inputForm.setLayout(new BoxLayout(inputForm, BoxLayout.Y_AXIS));
@@ -40,7 +41,6 @@ public class CreatePlayerView extends SubscriptionView {
         inputForm.add(playerNameLabel);
 
         JTextField playerName = new JTextField();
-        playerName.setBorder(BorderFactory.createCompoundBorder(playerName.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         inputForm.add(playerName);
 
         LabelPanel playerPointsLabel = new LabelPanel("Player Points");
@@ -48,16 +48,15 @@ public class CreatePlayerView extends SubscriptionView {
         inputForm.add(playerPointsLabel);
 
         JTextField playerPoints = new JTextField();
-        playerPoints.setBorder(BorderFactory.createCompoundBorder(playerPoints.getBorder(), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         inputForm.add(playerPoints);
 
         JPanel southPanel = new JPanel();
-        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 15));
         southPanel.setLayout(new BorderLayout());
+        southPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 10));
         frame.add(southPanel, BorderLayout.SOUTH);
 
         JPanel actionButtons = new JPanel();
-        actionButtons.setLayout(new FlowLayout());
+        actionButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
