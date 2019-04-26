@@ -4,20 +4,18 @@ import controller.GameController;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.component.MenuBar;
+import view.component.GameFrame;
+import view.component.SummaryPanel;
 import view.component.WheelPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.net.URL;
-import java.util.Objects;
 
 public class GameView extends SubscriptionView {
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
-    private JFrame frame;
     private DefaultTableModel dtm;
     private JPanel summaryPanel;
 
@@ -29,27 +27,12 @@ public class GameView extends SubscriptionView {
 
     @Override
     public void render() {
-        frame = new JFrame();
-        frame.setSize(780, 600);
-        frame.setJMenuBar(new MenuBar(frame, this, playerController));
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setLayout(new BorderLayout());
-
-        final String wheelFileLocation = "resources/images/Basic_roulette_wheel_1024x1024.png";
-        final URL location = getClass().getClassLoader().getResource(wheelFileLocation);
-        final ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
-        JLabel label = new JLabel();
+        final GameFrame frame = new GameFrame(this, playerController);
 
         WheelPanel wheelPanel = new WheelPanel(40);
-        frame.add(wheelPanel);
 
-        summaryPanel = new JPanel();
-        summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        summaryPanel.setPreferredSize(new Dimension(240, wheelPanel.getHeight()));
-        summaryPanel.setBackground(Color.lightGray);
-        frame.add(summaryPanel, BorderLayout.EAST);
+        frame.add(wheelPanel);
+        frame.add(new SummaryPanel(wheelPanel), BorderLayout.EAST);
 
         paintSummaryPanel();
     }
