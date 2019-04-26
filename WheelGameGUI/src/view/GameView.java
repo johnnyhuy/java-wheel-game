@@ -30,9 +30,10 @@ public class GameView extends SubscriptionView {
         final GameFrame frame = new GameFrame(this, playerController);
 
         WheelPanel wheelPanel = new WheelPanel(40);
+        summaryPanel = new SummaryPanel(wheelPanel);
 
         frame.add(wheelPanel);
-        frame.add(new SummaryPanel(wheelPanel), BorderLayout.EAST);
+        frame.add(summaryPanel, BorderLayout.EAST);
 
         paintSummaryPanel();
     }
