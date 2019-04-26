@@ -11,6 +11,8 @@ import view.component.WheelPanel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static helper.CollectionHelper.toList;
@@ -39,27 +41,40 @@ public class GameView extends SubscriptionView {
         toolbar.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
         frame.add(toolbar, BorderLayout.NORTH);
 
-        JPanel buttons = new JPanel();
-        buttons.setBackground(Color.LIGHT_GRAY);
-        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
-        toolbar.add(buttons, BorderLayout.WEST);
+        JPanel toolbarButtons = new JPanel();
+        toolbarButtons.setBackground(Color.LIGHT_GRAY);
+        toolbarButtons.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
+        toolbar.add(toolbarButtons, BorderLayout.WEST);
 
         JButton spinButton = new JButton("Spin");
-        buttons.add(spinButton, BorderLayout.WEST);
+        toolbarButtons.add(spinButton, BorderLayout.WEST);
 
         JComboBox<String> playersCombo = new JComboBox<>();
-        buttons.add(playersCombo, BorderLayout.CENTER);
+        toolbarButtons.add(playersCombo, BorderLayout.CENTER);
 
         List<Player> players = toList(gameEngine.getAllPlayers());
         for (Player player : players) {
             playersCombo.addItem(player.getPlayerName());
         }
 
-        WheelPanel wheelPanel = new WheelPanel(padding * 8);
+        WheelPanel wheelPanel = new WheelPanel(padding * 10);
         frame.add(wheelPanel);
 
         summaryPanel = new SummaryPanel(wheelPanel);
         frame.add(summaryPanel, BorderLayout.EAST);
+
+        JPanel statusBar = new JPanel();
+        statusBar.setLayout(new BorderLayout());
+        statusBar.setBackground(Color.WHITE);
+        frame.add(statusBar, BorderLayout.SOUTH);
+
+        JPanel eastStatusBar = new JPanel();
+        eastStatusBar.setBackground(Color.WHITE);
+        statusBar.add(eastStatusBar, BorderLayout.WEST);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        JLabel dateLabel = new JLabel(dateFormat.format(new Date()));
+        eastStatusBar.add(dateLabel);
 
         paintSummaryPanel();
     }
