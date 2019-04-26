@@ -80,9 +80,6 @@ public class GameView extends SubscriptionView {
     }
 
     private void paintSummaryPanel() {
-        JLabel summaryTitle = new JLabel("Sexy wheel game");
-        summaryPanel.add(summaryTitle);
-
         JTable playersTable = new JTable();
         dtm = new DefaultTableModel(0, 0);
         dtm.addColumn("Name");
