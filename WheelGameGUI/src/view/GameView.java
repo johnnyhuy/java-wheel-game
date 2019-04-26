@@ -5,12 +5,11 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.component.MenuBar;
+import view.component.WheelPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.net.URL;
 import java.util.Objects;
 
@@ -43,19 +42,8 @@ public class GameView extends SubscriptionView {
         final ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
         JLabel label = new JLabel();
 
-        final int wheelPadding = 40;
-        JPanel wheelPanel = new JPanel();
-        wheelPanel.add(label);
-        wheelPanel.setBorder(BorderFactory.createEmptyBorder(wheelPadding, wheelPadding, wheelPadding, wheelPadding));
-        wheelPanel.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int iconSize = wheelPanel.getWidth() > wheelPanel.getHeight() ? wheelPanel.getHeight() - (wheelPadding * 2) : wheelPanel.getWidth() - (wheelPadding * 2);
-                Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
-                label.setIcon(newIcon);
-            }
-        });
-        frame.add(wheelPanel, BorderLayout.CENTER);
+        WheelPanel wheelPanel = new WheelPanel(40);
+        frame.add(wheelPanel);
 
         summaryPanel = new JPanel();
         summaryPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
