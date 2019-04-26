@@ -14,7 +14,11 @@ public class MenuBar extends JMenuBar {
     public MenuBar(JFrame frame, GameView gameView, PlayerController playerController) {
         JMenu gameMenu = new JMenu("Game");
         gameMenu.setMnemonic(KeyEvent.VK_G);
-        this.add(gameMenu);
+        add(gameMenu);
+
+        JMenu helpMenu = new JMenu("Help");
+        helpMenu.setMnemonic(KeyEvent.VK_G);
+        add(helpMenu);
 
         JMenuItem listPlayer = new JMenuItem("Players", KeyEvent.VK_P);
         listPlayer.addActionListener(new ListPlayerListener(playerController));
