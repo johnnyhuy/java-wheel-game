@@ -16,6 +16,7 @@ public class WheelPanel extends JPanel {
 
         ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
         JLabel label = new JLabel();
+        label.setHorizontalAlignment(SwingConstants.CENTER);
 
         add(label, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(padding, padding, padding, padding));
