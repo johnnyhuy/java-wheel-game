@@ -11,6 +11,9 @@ import view.component.WheelPanel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
+
+import static helper.CollectionHelper.toList;
 
 public class GameView extends SubscriptionView {
     private GameEngine gameEngine;
@@ -28,11 +31,34 @@ public class GameView extends SubscriptionView {
     @Override
     public void render() {
         final GameFrame frame = new GameFrame(this, playerController);
+        final int padding = 5;
 
-        WheelPanel wheelPanel = new WheelPanel(40);
-        summaryPanel = new SummaryPanel(wheelPanel);
+        JPanel toolbar = new JPanel();
+        toolbar.setLayout(new BorderLayout());
+        toolbar.setBackground(Color.LIGHT_GRAY);
+        toolbar.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
+        frame.add(toolbar, BorderLayout.NORTH);
 
+        JPanel buttons = new JPanel();
+        buttons.setBackground(Color.LIGHT_GRAY);
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
+        toolbar.add(buttons, BorderLayout.WEST);
+
+        JButton spinButton = new JButton("Spin");
+        buttons.add(spinButton, BorderLayout.WEST);
+
+        JComboBox<String> playersCombo = new JComboBox<>();
+        buttons.add(playersCombo, BorderLayout.CENTER);
+
+        List<Player> players = toList(gameEngine.getAllPlayers());
+        for (Player player : players) {
+            playersCombo.addItem(player.getPlayerName());
+        }
+
+        WheelPanel wheelPanel = new WheelPanel(padding * 8);
         frame.add(wheelPanel);
+
+        summaryPanel = new SummaryPanel(wheelPanel);
         frame.add(summaryPanel, BorderLayout.EAST);
 
         paintSummaryPanel();
