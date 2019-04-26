@@ -4,14 +4,15 @@ import controller.PlayerController;
 import view.GameView;
 import view.listener.CloseWindowListener;
 import view.listener.CreatePlayerListener;
+import view.listener.DeletePlayerListener;
 import view.listener.ListPlayerListener;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-public class MenuBar extends JMenuBar {
-    public MenuBar(JFrame frame, GameView gameView, PlayerController playerController) {
+public class GameMenuBar extends JMenuBar {
+    public GameMenuBar(JFrame frame, GameView gameView, PlayerController playerController) {
         JMenu gameMenu = new JMenu("Game");
         gameMenu.setMnemonic(KeyEvent.VK_G);
         add(gameMenu);
@@ -31,6 +32,7 @@ public class MenuBar extends JMenuBar {
 
         JMenuItem removePlayer = new JMenuItem("Remove Player", KeyEvent.VK_R);
         removePlayer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK));
+        removePlayer.addActionListener(new DeletePlayerListener(playerController));
         gameMenu.add(removePlayer);
 
         gameMenu.addSeparator();
