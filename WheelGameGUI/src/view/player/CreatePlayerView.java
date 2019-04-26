@@ -4,8 +4,8 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import view.SubscriptionView;
 import view.component.LabelPanel;
+import view.listener.CloseWindowListener;
 import view.listener.StorePlayerListener;
-import view.listener.WindowCloseListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +56,7 @@ public class CreatePlayerView extends SubscriptionView {
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new WindowCloseListener(frame));
+        cancelButton.addActionListener(new CloseWindowListener(frame));
         actionButtons.add(cancelButton);
 
         JButton createButton = new JButton("Create");

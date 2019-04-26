@@ -32,7 +32,7 @@ public class GameView extends SubscriptionView {
     public void render() {
         frame = new JFrame();
         frame.setSize(780, 600);
-        frame.setJMenuBar(new MenuBar(this, playerController));
+        frame.setJMenuBar(new MenuBar(frame, this, playerController));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

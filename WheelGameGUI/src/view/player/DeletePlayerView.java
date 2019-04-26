@@ -4,8 +4,8 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
+import view.listener.CloseWindowListener;
 import view.listener.DestroyPlayerListener;
-import view.listener.WindowCloseListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,7 +63,7 @@ public class DeletePlayerView extends SubscriptionView {
         southPanel.add(actionButtons, BorderLayout.EAST);
 
         JButton cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(new WindowCloseListener(frame));
+        cancelButton.addActionListener(new CloseWindowListener(frame));
         actionButtons.add(cancelButton);
 
         JButton removeButton = new JButton("Remove");
