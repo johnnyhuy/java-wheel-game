@@ -32,6 +32,7 @@ public class GameView extends SubscriptionView {
 
     @Override
     public void render() {
+        // TODO: set minimum frame size
         final GameFrame frame = new GameFrame(this, playerController);
         final int padding = 5;
 
