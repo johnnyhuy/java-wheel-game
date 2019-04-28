@@ -7,6 +7,7 @@ import model.interfaces.Player;
 import view.component.GameFrame;
 import view.component.SummaryPanel;
 import view.component.WheelPanel;
+import view.listener.SpinListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -38,16 +39,15 @@ public class GameView extends SubscriptionView {
 
         JPanel toolbar = new JPanel();
         toolbar.setLayout(new BorderLayout());
-        toolbar.setBackground(Color.LIGHT_GRAY);
-        toolbar.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
+        toolbar.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
         frame.add(toolbar, BorderLayout.NORTH);
 
         JPanel toolbarButtons = new JPanel();
-        toolbarButtons.setBackground(Color.LIGHT_GRAY);
         toolbarButtons.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
         toolbar.add(toolbarButtons, BorderLayout.WEST);
 
         JButton spinButton = new JButton("Spin");
+        spinButton.addActionListener(new SpinListener(gameController));
         toolbarButtons.add(spinButton, BorderLayout.WEST);
 
         JComboBox<String> playersCombo = new JComboBox<>();
@@ -66,11 +66,11 @@ public class GameView extends SubscriptionView {
 
         JPanel statusBar = new JPanel();
         statusBar.setLayout(new BorderLayout());
-        statusBar.setBackground(Color.WHITE);
+        statusBar.setBackground(Color.LIGHT_GRAY);
         frame.add(statusBar, BorderLayout.SOUTH);
 
         JPanel eastStatusBar = new JPanel();
-        eastStatusBar.setBackground(Color.WHITE);
+        eastStatusBar.setBackground(Color.LIGHT_GRAY);
         statusBar.add(eastStatusBar, BorderLayout.WEST);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -103,8 +103,6 @@ public class GameView extends SubscriptionView {
     public void onNext(Integer item) {
         summaryPanel.removeAll();
         paintSummaryPanel();
-        summaryPanel.revalidate();
-        summaryPanel.repaint();
         getSubscription().request(1);
     }
 }

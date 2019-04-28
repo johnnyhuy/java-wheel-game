@@ -29,4 +29,13 @@ public class GameController extends Controller {
             }
         });
     }
+
+    public void spin() {
+        new Thread() {
+            @Override
+            public void run() {
+                gameEngine.spin(1, 500, 25);
+            }
+        }.start();
+    }
 }
