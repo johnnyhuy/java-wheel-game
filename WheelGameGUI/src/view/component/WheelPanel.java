@@ -41,15 +41,29 @@ public class WheelPanel extends JPanel {
         return this.icon;
     }
 
-    public int getPadding() {
-        return this.padding;
-    }
-
     public BallPanel getBallPanel() {
         return this.ballPanel;
     }
 
     public int getWheelSize() {
         return getWidth() > getHeight() ? getHeight() - (padding * 2) : getWidth() - (padding * 2);
+    }
+
+    public void setAngle(int angle) {
+        JLabel wheelLabel = getWheelLabel();
+        int ballRadius = ballPanel.getRadius();
+        int ballDiameter = ballPanel.getDiameter();
+        int iconSize = getWheelSize();
+
+        int xOffset = Math.round((wheelLabel.getWidth() / 2) - ballRadius);
+        int yOffset = Math.round((wheelLabel.getHeight() / 2) - ballRadius);
+
+        double rads = Math.toRadians(angle);
+        int radius = (iconSize / 2) - ballRadius;
+
+        int x = Math.round((float) (xOffset + Math.cos(rads) * radius));
+        int y = Math.round((float) (yOffset + Math.sin(rads) * radius));
+
+        ballPanel.setBounds(x, y, ballDiameter, ballDiameter);
     }
 }

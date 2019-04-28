@@ -3,19 +3,22 @@ package view;
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
 import view.component.BallPanel;
+import view.component.WheelPanel;
 import view.interfaces.GameEngineCallback;
 
 public class GameEngineCallbackGUI implements GameEngineCallback {
-    private BallPanel ballPanel;
+    private final BallPanel ballPanel;
+    private WheelPanel wheelPanel;
 
-    public GameEngineCallbackGUI(BallPanel ballPanel) {
-        this.ballPanel = ballPanel;
+    public GameEngineCallbackGUI(WheelPanel wheelPanel) {
+        this.wheelPanel = wheelPanel;
+        this.ballPanel = wheelPanel.getBallPanel();
         int angle = Math.round(360 / Slot.WHEEL_SIZE);
     }
 
     @Override
 	public void nextSlot(Slot slot, GameEngine engine) {
-		// TODO Auto-generated method stub
+        wheelPanel.setAngle(0);
 	}
 
 	@Override
