@@ -2,14 +2,14 @@ package view;
 
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
-import view.component.CirclePanel;
+import view.component.BallPanel;
 import view.interfaces.GameEngineCallback;
 
 public class GameEngineCallbackGUI implements GameEngineCallback {
-    private CirclePanel circlePanel;
+    private BallPanel ballPanel;
 
-    public GameEngineCallbackGUI(CirclePanel circlePanel) {
-        this.circlePanel = circlePanel;
+    public GameEngineCallbackGUI(BallPanel ballPanel) {
+        this.ballPanel = ballPanel;
         int angle = Math.round(360 / Slot.WHEEL_SIZE);
     }
 

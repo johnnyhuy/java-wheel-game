@@ -3,11 +3,10 @@ package view.component;
 import javax.swing.*;
 import java.awt.*;
 
-public class CirclePanel extends JPanel {
+public class BallPanel extends JPanel {
     private int diameter;
 
-    public CirclePanel(int radius) {
-        this.diameter = radius * 2;
+    public BallPanel() {
         setOpaque(false);
     }
 

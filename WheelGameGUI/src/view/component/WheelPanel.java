@@ -9,19 +9,47 @@ import java.net.URL;
 import java.util.Objects;
 
 public class WheelPanel extends JPanel {
+    private final ImageIcon icon;
+    private final JLabel wheelLabel;
+    private final int padding;
+    private final BallPanel ballPanel;
+
     public WheelPanel(GameEngine gameEngine, int padding) {
+        this.padding = padding;
+        this.ballPanel = new BallPanel();
+
         final String wheelFileLocation = "resources/images/Basic_roulette_wheel_1024x1024.png";
         final URL location = getClass().getClassLoader().getResource(wheelFileLocation);
 
         setLayout(new BorderLayout());
 
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(location));
-        JLabel label = new JLabel();
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setLayout(null);
+        icon = new ImageIcon(Objects.requireNonNull(location));
+        wheelLabel = new JLabel();
+        wheelLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        wheelLabel.setLayout(null);
 
-        add(label, BorderLayout.CENTER);
+        add(wheelLabel, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(padding, padding, padding, padding));
-        addComponentListener(new WheelPanelListener(gameEngine, this, icon, label, padding));
+        addComponentListener(new WheelPanelListener(gameEngine, this));
+    }
+
+    public JLabel getWheelLabel() {
+        return this.wheelLabel;
+    }
+
+    public ImageIcon getIcon() {
+        return this.icon;
+    }
+
+    public int getPadding() {
+        return this.padding;
+    }
+
+    public BallPanel getBallPanel() {
+        return this.ballPanel;
+    }
+
+    public int getWheelSize() {
+        return getWidth() > getHeight() ? getHeight() - (padding * 2) : getWidth() - (padding * 2);
     }
 }

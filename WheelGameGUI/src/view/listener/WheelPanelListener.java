@@ -2,7 +2,8 @@ package view.listener;
 
 import model.interfaces.GameEngine;
 import view.GameEngineCallbackGUI;
-import view.component.CirclePanel;
+import view.component.BallPanel;
+import view.component.WheelPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,21 +15,21 @@ public class WheelPanelListener implements ComponentListener {
     private final JLabel label;
     private int circleRadius;
     private GameEngine gameEngine;
-    private JPanel panel;
-    private CirclePanel circlePanel;
+    private WheelPanel wheelPanel;
+    private BallPanel ballPanel;
     private int padding;
     private int iconSize;
 
-    public WheelPanelListener(GameEngine gameEngine, JPanel panel, ImageIcon icon, JLabel label, int padding) {
+    public WheelPanelListener(GameEngine gameEngine, WheelPanel wheelPanel) {
         this.gameEngine = gameEngine;
-        this.panel = panel;
-        this.icon = icon;
-        this.label = label;
-        this.padding = padding;
-        this.circlePanel = new CirclePanel(iconSize);
+        this.wheelPanel = wheelPanel;
+        this.icon = wheelPanel.getIcon();
+        this.label = wheelPanel.getWheelLabel();
+        this.padding = wheelPanel.getPadding();
+        this.ballPanel = wheelPanel.getBallPanel();
 
-        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(circlePanel));
-        label.add(circlePanel);
+        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(ballPanel));
+        label.add(ballPanel);
     }
 
     private Point getCirclePoint(float angle) {
@@ -46,15 +47,15 @@ public class WheelPanelListener implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        iconSize = panel.getWidth() > panel.getHeight() ? panel.getHeight() - (padding * 2) : panel.getWidth() - (padding * 2);
+        iconSize = wheelPanel.getWheelSize();
 
         // What a ridiculous number aye?
         circleRadius = (int) Math.round(iconSize * 0.0375);
-        circlePanel.setRadius(circleRadius);
+        ballPanel.setRadius(circleRadius);
 
         Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
         label.setIcon(newIcon);
-        circlePanel.setLocation(getCirclePoint(0));
+        ballPanel.setLocation(getCirclePoint(0));
     }
 
     @Override
