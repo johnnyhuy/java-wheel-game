@@ -58,7 +58,7 @@ public class GameView extends SubscriptionView {
             playersCombo.addItem(player.getPlayerName());
         }
 
-        WheelPanel wheelPanel = new WheelPanel(padding * 10);
+        WheelPanel wheelPanel = new WheelPanel(gameEngine, padding * 10);
         frame.add(wheelPanel);
 
         summaryPanel = new SummaryPanel(wheelPanel);

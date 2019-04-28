@@ -1,5 +1,7 @@
 package view.listener;
 
+import model.interfaces.GameEngine;
+import view.GameEngineCallbackGUI;
 import view.component.CirclePanel;
 
 import javax.swing.*;
@@ -11,18 +13,21 @@ public class WheelPanelListener implements ComponentListener {
     private final ImageIcon icon;
     private final JLabel label;
     private int circleRadius;
+    private GameEngine gameEngine;
     private JPanel panel;
     private CirclePanel circlePanel;
     private int padding;
     private int iconSize;
 
-    public WheelPanelListener(JPanel panel, ImageIcon icon, JLabel label, int padding) {
+    public WheelPanelListener(GameEngine gameEngine, JPanel panel, ImageIcon icon, JLabel label, int padding) {
+        this.gameEngine = gameEngine;
         this.panel = panel;
         this.icon = icon;
         this.label = label;
         this.padding = padding;
         this.circlePanel = new CirclePanel(iconSize);
 
+        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(circlePanel));
         label.add(circlePanel);
     }
 
@@ -46,7 +51,6 @@ public class WheelPanelListener implements ComponentListener {
         // What a ridiculous number aye?
         circleRadius = (int) Math.round(iconSize * 0.0375);
         circlePanel.setRadius(circleRadius);
-        circlePanel.repaint();
 
         Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
         label.setIcon(newIcon);

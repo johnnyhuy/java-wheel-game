@@ -6,6 +6,7 @@ import model.GameEngineImpl;
 import model.SimplePlayer;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
+import view.GameEngineCallbackImpl;
 
 import javax.swing.*;
 import java.util.UUID;
@@ -14,6 +15,8 @@ import java.util.concurrent.SubmissionPublisher;
 public class WheelGameGUI {
     public static void main(String[] args) {
         final GameEngine gameEngine = new GameEngineImpl();
+        gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
+
         SubmissionPublisher<Integer> publisher = new SubmissionPublisher<>();
         final PlayerController playerController = new PlayerController(gameEngine, publisher);
         final GameController gameController = new GameController(gameEngine, publisher, playerController);
