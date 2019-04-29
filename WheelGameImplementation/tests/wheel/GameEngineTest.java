@@ -2,14 +2,21 @@ package wheel;
 
 import model.GameEngineImpl;
 import model.SimplePlayer;
+import model.SlotImpl;
 import model.enumeration.BetType;
+import model.enumeration.Color;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
+import model.interfaces.Slot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import view.GameEngineCallbackImpl;
 import view.interfaces.GameEngineCallback;
 
+import java.util.Collection;
+import java.util.List;
+
+import static helper.CollectionHelper.toList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameEngineTest {
@@ -332,5 +339,32 @@ class GameEngineTest {
 
         // Assert
         assertFalse(removedGameCallback);
+    }
+
+    @Test
+    void testGetNewSlotIsInvalid() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Slot newSlot = new SlotImpl(0, Color.GREEN00, 0);
+
+        // Act
+        List<Slot> wheelSlots = toList(gameEngine.getWheelSlots());
+
+        // Assert
+        assertNotEquals(newSlot, wheelSlots.get(0));
+    }
+
+    @Test
+    void testGetTheSameWheelSlots() {
+        // Arrange
+        final GameEngine gameEngine = new GameEngineImpl();
+        Slot newSlot = new SlotImpl(0, Color.GREEN00, 0);
+
+        // Act
+        Collection<Slot> wheelSlots = gameEngine.getWheelSlots();
+        Collection<Slot> wheelSlotsTwo = gameEngine.getWheelSlots();
+
+        // Assert
+        assertEquals(wheelSlots, wheelSlotsTwo);
     }
 }
