@@ -49,7 +49,7 @@ public class WheelPanel extends JPanel {
         return getWidth() > getHeight() ? getHeight() - (padding * 2) : getWidth() - (padding * 2);
     }
 
-    public void setAngle(int angle) {
+    public void setBallAngle(double angle) {
         JLabel wheelLabel = getWheelLabel();
         int ballRadius = ballPanel.getRadius();
         int ballDiameter = ballPanel.getDiameter();

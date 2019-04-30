@@ -2,29 +2,38 @@ package view;
 
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
-import view.component.BallPanel;
 import view.component.WheelPanel;
 import view.interfaces.GameEngineCallback;
 
-public class GameEngineCallbackGUI implements GameEngineCallback {
-    private final BallPanel ballPanel;
-    private WheelPanel wheelPanel;
-    private int test;
+import java.util.HashMap;
 
-    public GameEngineCallbackGUI(WheelPanel wheelPanel) {
+public class GameEngineCallbackGUI implements GameEngineCallback {
+    private WheelPanel wheelPanel;
+    private final double angle;
+    private int startingAngle;
+    private HashMap<Slot, Double> wheelMap;
+
+    public GameEngineCallbackGUI(GameEngine gameEngine, WheelPanel wheelPanel) {
         this.wheelPanel = wheelPanel;
-        this.ballPanel = wheelPanel.getBallPanel();
-        int angle = Math.round(360 / Slot.WHEEL_SIZE);
-        test = 0;
+        this.angle = (double) 360 / Slot.WHEEL_SIZE;
+        this.wheelMap = new HashMap<>();
+
+        double incrementAngle = angle / 2;
+
+        for (Slot slot : gameEngine.getWheelSlots()) {
+            wheelMap.put(slot, incrementAngle);
+            incrementAngle += angle;
+        }
+
+        startingAngle = 0;
     }
 
     @Override
 	public void nextSlot(Slot slot, GameEngine engine) {
-        wheelPanel.setAngle(test);
-        test = test + 10;
-	}
+        wheelPanel.setBallAngle(wheelMap.get(slot));
+    }
 
-	@Override
+    @Override
 	public void result(Slot winningSlot, GameEngine engine) {
 		// TODO Auto-generated method stub
 	}

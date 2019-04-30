@@ -24,7 +24,7 @@ public class WheelPanelListener implements ComponentListener {
         this.label = wheelPanel.getWheelLabel();
         this.ballPanel = wheelPanel.getBallPanel();
 
-        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(wheelPanel));
+        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(gameEngine, wheelPanel));
         label.add(ballPanel);
     }
 
@@ -38,8 +38,6 @@ public class WheelPanelListener implements ComponentListener {
 
         Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
         label.setIcon(newIcon);
-
-        wheelPanel.setAngle(0);
     }
 
     @Override
