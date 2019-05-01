@@ -1,6 +1,8 @@
 package controller;
 
+import model.enumeration.BetType;
 import model.interfaces.GameEngine;
+import model.interfaces.Player;
 import view.GameView;
 import view.SubscriptionView;
 
@@ -37,5 +39,9 @@ public class GameController extends Controller {
                 gameEngine.spin(1, 500, 25);
             }
         }.start();
+    }
+
+    public void bet(Player player, BetType betType, int bet) {
+        gameEngine.placeBet(player, bet, betType);
     }
 }

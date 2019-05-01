@@ -28,6 +28,7 @@ public class WheelPanelListener implements ComponentListener {
         label.add(ballPanel);
     }
 
+    // TODO: ball needs to persist location on window resize
     @Override
     public void componentResized(ComponentEvent e) {
         iconSize = wheelPanel.getWheelSize();
