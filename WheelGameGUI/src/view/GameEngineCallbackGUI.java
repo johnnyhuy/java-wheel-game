@@ -9,23 +9,21 @@ import java.util.HashMap;
 
 public class GameEngineCallbackGUI implements GameEngineCallback {
     private WheelPanel wheelPanel;
-    private final double angle;
-    private int startingAngle;
     private HashMap<Slot, Double> wheelMap;
 
     public GameEngineCallbackGUI(GameEngine gameEngine, WheelPanel wheelPanel) {
         this.wheelPanel = wheelPanel;
-        this.angle = (double) 360 / Slot.WHEEL_SIZE;
         this.wheelMap = new HashMap<>();
 
-        double incrementAngle = angle / 2;
+        final double angleIncrement = (double) 360 / Slot.WHEEL_SIZE;
+
+        // Offset the angle to align the picture
+        double angle = (angleIncrement / 2) - (angleIncrement * (double) (Slot.WHEEL_SIZE / 4));
 
         for (Slot slot : gameEngine.getWheelSlots()) {
-            wheelMap.put(slot, incrementAngle);
-            incrementAngle += angle;
+            wheelMap.put(slot, angle);
+            angle += angleIncrement;
         }
-
-        startingAngle = 0;
     }
 
     @Override
