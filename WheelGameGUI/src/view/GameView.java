@@ -4,9 +4,8 @@ import controller.GameController;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.component.GameFrame;
-import view.component.SummaryPanel;
-import view.component.WheelPanel;
+import view.component.*;
+import view.listener.GameFrameListener;
 import view.listener.SpinListener;
 
 import javax.swing.*;
@@ -23,7 +22,10 @@ public class GameView extends SubscriptionView {
     private GameController gameController;
     private PlayerController playerController;
     private DefaultTableModel dtm;
-    private JPanel summaryPanel;
+    private SummaryPanel summaryPanel;
+    private JTable table;
+    private JScrollPane scrollPane;
+    private GameFrame frame;
 
     public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController) {
         this.gameEngine = gameEngine;
@@ -34,7 +36,7 @@ public class GameView extends SubscriptionView {
     @Override
     public void render() {
         // TODO: set minimum frame size
-        final GameFrame frame = new GameFrame(this, playerController);
+        frame = new GameFrame(this, playerController);
         final int padding = 5;
 
         JPanel toolbar = new JPanel();
@@ -61,7 +63,8 @@ public class GameView extends SubscriptionView {
         WheelPanel wheelPanel = new WheelPanel(gameEngine, padding * 10);
         frame.add(wheelPanel);
 
-        summaryPanel = new SummaryPanel(wheelPanel);
+        summaryPanel = new SummaryPanel(frame, wheelPanel);
+        summaryPanel.setLayout(new BorderLayout());
         frame.add(summaryPanel, BorderLayout.EAST);
 
         JPanel statusBar = new JPanel();
@@ -78,17 +81,25 @@ public class GameView extends SubscriptionView {
         eastStatusBar.add(dateLabel);
 
         paintSummaryPanel();
+
+        frame.addComponentListener(new GameFrameListener(summaryPanel));
     }
 
     private void paintSummaryPanel() {
-        JTable playersTable = new JTable();
-        dtm = new DefaultTableModel(0, 0);
+        DefaultTableModel dtm = new TableModel();
+        dtm.addColumn("ID");
         dtm.addColumn("Name");
         dtm.addColumn("Points");
-        playersTable.setModel(dtm);
+
+        table = new JTable();
+        table.setDefaultRenderer(Object.class, new TableRenderer());
+        table.getTableHeader().setPreferredSize(new Dimension(0, 40));
+        table.setModel(dtm);
+        table.setRowHeight(40);
 
         for (Player player : gameEngine.getAllPlayers()) {
             Object[] row = new Object[]{
+                player.getPlayerId(),
                 player.getPlayerName(),
                 player.getPoints()
             };
@@ -96,7 +107,11 @@ public class GameView extends SubscriptionView {
             dtm.addRow(row);
         }
 
-        summaryPanel.add(playersTable);
+        scrollPane = new JScrollPane();
+        scrollPane.setViewportView(table);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        scrollPane.setBackground(null);
+        summaryPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
     @Override
