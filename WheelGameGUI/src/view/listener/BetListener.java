@@ -1,26 +1,23 @@
 package view.listener;
 
 import controller.GameController;
+import model.BetTypeViewModel;
+import model.PlayerViewModel;
 import model.enumeration.BetType;
 import model.interfaces.Player;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class BetListener implements ActionListener {
     private GameController gameController;
-    private List<Player> players;
-    private BetType[] betTypes;
-    private JComboBox<String> playerCombo;
-    private JComboBox<String> betTypeCombo;
+    private JComboBox<PlayerViewModel> playerCombo;
+    private JComboBox<BetTypeViewModel> betTypeCombo;
     private JTextField betAmount;
 
-    public BetListener(GameController gameController, List<Player> players, BetType[] betTypes, JComboBox<String> playerCombo, JComboBox<String> betTypeCombo, JTextField betAmount) {
+    public BetListener(GameController gameController, JComboBox<PlayerViewModel> playerCombo, JComboBox<BetTypeViewModel> betTypeCombo, JTextField betAmount) {
         this.gameController = gameController;
-        this.players = players;
-        this.betTypes = betTypes;
         this.playerCombo = playerCombo;
         this.betTypeCombo = betTypeCombo;
         this.betAmount = betAmount;
@@ -28,12 +25,10 @@ public class BetListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int playerIndex = playerCombo.getSelectedIndex();
-        Player player = players.get(playerIndex);
-        BetType betType = betTypes[betTypeCombo.getSelectedIndex()];
+        Player player = playerCombo.getItemAt(playerCombo.getSelectedIndex()).getPlayer();
+        BetType betType = betTypeCombo.getItemAt(betTypeCombo.getSelectedIndex()).getBetType();
         int bet = Integer.parseInt(betAmount.getText());
-
-        players.remove(playerIndex);
+        playerCombo.removeItemAt(playerCombo.getSelectedIndex());
 
         gameController.bet(player, betType, bet);
     }
