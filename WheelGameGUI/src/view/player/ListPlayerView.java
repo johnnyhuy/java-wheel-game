@@ -90,7 +90,7 @@ public class ListPlayerView extends SubscriptionView {
     }
 
     @Override
-    public void onNext(Integer item) {
+    public void onNext(Object item) {
         table.removeAll();
         paintPlayerTable();
         getSubscription().request(1);

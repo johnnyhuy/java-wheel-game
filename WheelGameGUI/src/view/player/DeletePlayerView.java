@@ -73,7 +73,7 @@ public class DeletePlayerView extends SubscriptionView {
     }
 
     @Override
-    public void onNext(Integer item) {
+    public void onNext(Object item) {
 
     }
 }

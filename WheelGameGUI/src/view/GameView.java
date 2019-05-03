@@ -161,7 +161,7 @@ public class GameView extends SubscriptionView {
     }
 
     @Override
-    public void onNext(Integer item) {
+    public void onNext(Object item) {
         players = toList(gameEngine.getAllPlayers());
         betAvailablePlayers = toList(gameEngine.getAllPlayers());
 
