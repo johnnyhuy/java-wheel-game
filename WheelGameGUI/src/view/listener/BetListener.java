@@ -28,9 +28,12 @@ public class BetListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Player player = players.get(playerCombo.getSelectedIndex());
+        int playerIndex = playerCombo.getSelectedIndex();
+        Player player = players.get(playerIndex);
         BetType betType = betTypes[betTypeCombo.getSelectedIndex()];
         int bet = Integer.parseInt(betAmount.getText());
+
+        players.remove(playerIndex);
 
         gameController.bet(player, betType, bet);
     }

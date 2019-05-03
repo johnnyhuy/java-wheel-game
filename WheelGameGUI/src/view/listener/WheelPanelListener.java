@@ -1,7 +1,6 @@
 package view.listener;
 
 import model.interfaces.GameEngine;
-import view.GameEngineCallbackGUI;
 import view.component.BallPanel;
 import view.component.WheelPanel;
 
@@ -24,7 +23,6 @@ public class WheelPanelListener implements ComponentListener {
         this.label = wheelPanel.getWheelLabel();
         this.ballPanel = wheelPanel.getBallPanel();
 
-        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(gameEngine, wheelPanel));
         label.add(ballPanel);
     }
 

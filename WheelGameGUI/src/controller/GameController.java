@@ -43,5 +43,10 @@ public class GameController extends Controller {
 
     public void bet(Player player, BetType betType, int bet) {
         gameEngine.placeBet(player, bet, betType);
+        publisher.submit(1);
+    }
+
+    public void result() {
+        publisher.submit(1);
     }
 }

@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import static helper.CollectionHelper.toList;
 import static helper.StringHelper.capitalize;
 
 public class GameView extends SubscriptionView {
+    private List<Player> betAvailablePlayers;
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
@@ -30,19 +30,15 @@ public class GameView extends SubscriptionView {
     private JTable table;
     private JScrollPane scrollPane;
     private GameFrame frame;
-    private final List<Player> players;
-    private HashMap<Player, Integer> previousPlayerPoints;
+    private List<Player> players;
+    private JComboBox<String> playerCombo;
 
     public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController) {
         this.gameEngine = gameEngine;
         this.gameController = gameController;
         this.playerController = playerController;
         this.players = toList(gameEngine.getAllPlayers());
-        this.previousPlayerPoints = new HashMap<>();
-
-        for (Player player : players) {
-            previousPlayerPoints.put(player, player.getPoints());
-        }
+        this.betAvailablePlayers = toList(gameEngine.getAllPlayers());
     }
 
     @Override
@@ -77,12 +73,9 @@ public class GameView extends SubscriptionView {
         betAmount.setPreferredSize(new Dimension(100, 26));
         eastPanel.add(betAmount);
 
-        JComboBox<String> playerCombo = new JComboBox<>();
+        playerCombo = new JComboBox<>();
+        paintPlayers();
         eastPanel.add(playerCombo, BorderLayout.CENTER);
-
-        for (Player player : players) {
-            playerCombo.addItem(player.getPlayerName());
-        }
 
         JComboBox<String> betTypeCombo = new JComboBox<>();
         eastPanel.add(betTypeCombo, BorderLayout.CENTER);
@@ -93,7 +86,7 @@ public class GameView extends SubscriptionView {
         }
 
         JButton betButton = new JButton("Place Bet");
-        betButton.addActionListener(new BetListener(gameController, players, betTypes, playerCombo, betTypeCombo, betAmount));
+        betButton.addActionListener(new BetListener(gameController, betAvailablePlayers, betTypes, playerCombo, betTypeCombo, betAmount));
         eastPanel.add(betButton, BorderLayout.WEST);
 
         WheelPanel wheelPanel = new WheelPanel(gameEngine, padding * 10);
@@ -119,26 +112,26 @@ public class GameView extends SubscriptionView {
         paintSummaryPanel();
 
         frame.addComponentListener(new GameFrameListener(summaryPanel));
+
+        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(gameController, gameEngine, this, wheelPanel));
     }
 
     private void paintSummaryPanel() {
         DefaultTableModel dtm = new TableModel();
         dtm.addColumn("Name");
         dtm.addColumn("Points");
+        dtm.addColumn("Bet");
 
         for (Player player : players) {
-            int pointDifference = previousPlayerPoints.get(player) - player.getPoints();
-            String pointSymbol = "";
-
-            if (pointDifference > 0) {
-                pointSymbol = "+";
-            } else if (pointDifference < 0) {
-                pointSymbol = "-";
+            String playerBet = "";
+            if (player.getBetType() != null) {
+                playerBet = player.getBet() + " on " + capitalize(player.getBetType().name());
             }
 
             Object[] row = new Object[]{
                 player.getPlayerName(),
-                player.getPoints() + " " + pointSymbol + pointDifference
+                player.getPoints(),
+                playerBet
             };
 
             dtm.addRow(row);
@@ -157,10 +150,30 @@ public class GameView extends SubscriptionView {
         summaryPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
+    private void paintPlayers() {
+        if (playerCombo.getItemCount() > 0) {
+            playerCombo.removeAllItems();
+        }
+
+        for (Player player : betAvailablePlayers) {
+            playerCombo.addItem(player.getPlayerName());
+        }
+    }
+
     @Override
     public void onNext(Integer item) {
+        players = toList(gameEngine.getAllPlayers());
+        betAvailablePlayers = toList(gameEngine.getAllPlayers());
+
+        paintPlayers();
+        playerCombo.revalidate();
+        playerCombo.repaint();
+
         summaryPanel.removeAll();
         paintSummaryPanel();
+        summaryPanel.revalidate();
+        summaryPanel.repaint();
+
         getSubscription().request(1);
     }
 }
