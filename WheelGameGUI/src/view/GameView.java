@@ -125,23 +125,30 @@ public class GameView extends SubscriptionView {
         DefaultTableModel dtm = new TableModel();
         dtm.addColumn("Name");
         dtm.addColumn("Points");
-        dtm.addColumn("Win/Loss");
+
+        for (Player player : players) {
+            int pointDifference = previousPlayerPoints.get(player) - player.getPoints();
+            String pointSymbol = "";
+
+            if (pointDifference > 0) {
+                pointSymbol = "+";
+            } else if (pointDifference < 0) {
+                pointSymbol = "-";
+            }
+
+            Object[] row = new Object[]{
+                player.getPlayerName(),
+                player.getPoints() + " " + pointSymbol + pointDifference
+            };
+
+            dtm.addRow(row);
+        }
 
         table = new JTable();
         table.setDefaultRenderer(Object.class, new TableRenderer());
         table.getTableHeader().setPreferredSize(new Dimension(0, 40));
         table.setModel(dtm);
         table.setRowHeight(40);
-
-        for (Player player : players) {
-            Object[] row = new Object[]{
-                player.getPlayerName(),
-                player.getPoints(),
-                previousPlayerPoints.get(player)
-            };
-
-            dtm.addRow(row);
-        }
 
         scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);
