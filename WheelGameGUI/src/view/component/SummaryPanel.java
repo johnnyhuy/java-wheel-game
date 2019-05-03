@@ -13,6 +13,7 @@ public class SummaryPanel extends JPanel {
 
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY)));
         setSize();
+        setLayout(new BorderLayout());
     }
 
     public void setSize() {

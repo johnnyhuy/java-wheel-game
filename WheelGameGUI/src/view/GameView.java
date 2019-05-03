@@ -18,7 +18,6 @@ import static helper.CollectionHelper.toList;
 import static helper.StringHelper.capitalize;
 
 public class GameView extends SubscriptionView {
-    private List<Player> betAvailablePlayers;
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
@@ -28,7 +27,6 @@ public class GameView extends SubscriptionView {
     private JScrollPane scrollPane;
     private GameFrame frame;
     private List<Player> players;
-    private JComboBox<String> playerCombo;
     private ToolbarPanel toolbar;
 
     public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController) {
@@ -51,7 +49,7 @@ public class GameView extends SubscriptionView {
         frame.add(wheelPanel);
 
         summaryPanel = new SummaryPanel(frame, wheelPanel);
-        summaryPanel.setLayout(new BorderLayout());
+        paintSummaryPanel();
         frame.add(summaryPanel, BorderLayout.EAST);
 
         JPanel statusBar = new JPanel();
@@ -66,8 +64,6 @@ public class GameView extends SubscriptionView {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         JLabel dateLabel = new JLabel(dateFormat.format(new Date()));
         eastStatusBar.add(dateLabel);
-
-        paintSummaryPanel();
 
         frame.addComponentListener(new GameFrameListener(summaryPanel));
 
@@ -109,14 +105,11 @@ public class GameView extends SubscriptionView {
     }
 
     @Override
-    public void onNext(Object item) {
+    public void onNext(Boolean success) {
         players = toList(gameEngine.getAllPlayers());
 
         toolbar.revalidate();
         toolbar.repaint();
-
-        playerCombo.revalidate();
-        playerCombo.repaint();
 
         summaryPanel.removeAll();
         paintSummaryPanel();

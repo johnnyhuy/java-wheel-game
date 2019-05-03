@@ -11,10 +11,10 @@ import javax.swing.*;
 import java.util.concurrent.SubmissionPublisher;
 
 public class PlayerController extends Controller {
-    private SubmissionPublisher<Integer> publisher;
+    private SubmissionPublisher<Boolean> publisher;
     private GameEngine gameEngine;
 
-    public PlayerController(GameEngine gameEngine, SubmissionPublisher<Integer> publisher) {
+    public PlayerController(GameEngine gameEngine, SubmissionPublisher<Boolean> publisher) {
         this.gameEngine = gameEngine;
         this.publisher = publisher;
     }
@@ -57,11 +57,11 @@ public class PlayerController extends Controller {
 
     public void store(Player player) {
         gameEngine.addPlayer(player);
-        publisher.submit(1);
+        publisher.submit(true);
     }
 
     public void destroy(Player player) {
         gameEngine.removePlayer(player);
-        publisher.submit(1);
+        publisher.submit(true);
     }
 }

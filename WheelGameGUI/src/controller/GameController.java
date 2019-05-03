@@ -11,10 +11,10 @@ import java.util.concurrent.SubmissionPublisher;
 
 public class GameController extends Controller {
     private GameEngine gameEngine;
-    private SubmissionPublisher<Integer> publisher;
+    private SubmissionPublisher<Boolean> publisher;
     private PlayerController playerController;
 
-    public GameController(GameEngine gameEngine, SubmissionPublisher<Integer> publisher, PlayerController playerController) {
+    public GameController(GameEngine gameEngine, SubmissionPublisher<Boolean> publisher, PlayerController playerController) {
         this.gameEngine = gameEngine;
         this.publisher = publisher;
         this.playerController = playerController;
@@ -37,16 +37,17 @@ public class GameController extends Controller {
             @Override
             public void run() {
                 gameEngine.spin(1, 500, 25);
+                publisher.submit(true);
             }
         }.start();
     }
 
     public void bet(Player player, BetType betType, int bet) {
         gameEngine.placeBet(player, bet, betType);
-        publisher.submit(1);
+        publisher.submit(true);
     }
 
     public void result() {
-        publisher.submit(1);
+        publisher.submit(true);
     }
 }

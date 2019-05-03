@@ -6,7 +6,7 @@ import java.util.concurrent.Flow;
  * Abstract class used to enable pub sub flow on views.
  * Since some view may not need this feature.
  */
-public abstract class SubscriptionView implements View, Flow.Subscriber {
+public abstract class SubscriptionView implements View, Flow.Subscriber<Boolean> {
     private Flow.Subscription subscription;
 
     @Override

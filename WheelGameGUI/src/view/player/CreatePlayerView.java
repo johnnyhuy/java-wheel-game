@@ -66,7 +66,7 @@ public class CreatePlayerView extends SubscriptionView {
     }
 
     @Override
-    public void onNext(Object item) {
+    public void onNext(Boolean success) {
 
     }
 }

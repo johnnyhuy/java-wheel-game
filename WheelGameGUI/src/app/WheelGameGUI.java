@@ -17,7 +17,7 @@ public class WheelGameGUI {
         final GameEngine gameEngine = new GameEngineImpl();
         gameEngine.addGameEngineCallback(new GameEngineCallbackImpl());
 
-        SubmissionPublisher<Integer> publisher = new SubmissionPublisher<>();
+        SubmissionPublisher<Boolean> publisher = new SubmissionPublisher<>();
         final PlayerController playerController = new PlayerController(gameEngine, publisher);
         final GameController gameController = new GameController(gameEngine, publisher, playerController);
 
