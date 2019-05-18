@@ -59,6 +59,22 @@ public class SlotImpl implements Slot {
     }
 
     /**
+     * Compare actual objects.
+     *
+     * @param object to compare
+     * @return whether the object is equal
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Slot))
+            return false;
+        else if (object == this)
+            return true;
+
+        return equals((Slot) object);
+    }
+
+    /**
      * Compare slot with another one.
      *
      * @param slot - another Slot to compare with
@@ -76,6 +92,6 @@ public class SlotImpl implements Slot {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(position, color.hashCode(), number);
+        return Objects.hash(position, color, number);
     }
 }

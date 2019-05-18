@@ -342,7 +342,7 @@ class GameEngineTest {
     }
 
     @Test
-    void testGetNewSlotIsInvalid() {
+    void testGetNewSlotIsValid() {
         // Arrange
         final GameEngine gameEngine = new GameEngineImpl();
         Slot newSlot = new SlotImpl(0, Color.GREEN00, 0);
@@ -351,7 +351,7 @@ class GameEngineTest {
         List<Slot> wheelSlots = toList(gameEngine.getWheelSlots());
 
         // Assert
-        assertNotEquals(newSlot, wheelSlots.get(0));
+        assertEquals(newSlot, wheelSlots.get(0));
     }
 
     @Test
