@@ -4,8 +4,8 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
-import view.listener.CloseWindowListener;
-import view.listener.DestroyPlayerListener;
+import view.listener.player.DestroyPlayerListener;
+import view.listener.window.CloseWindowListener;
 
 import javax.swing.*;
 import java.awt.*;

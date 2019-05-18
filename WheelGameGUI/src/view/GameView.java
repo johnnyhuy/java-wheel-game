@@ -4,8 +4,13 @@ import controller.GameController;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.component.*;
-import view.listener.GameFrameListener;
+import view.component.frame.GameFrame;
+import view.component.panel.SummaryPanel;
+import view.component.panel.ToolbarPanel;
+import view.component.panel.WheelPanel;
+import view.component.table.TableModel;
+import view.component.table.TableRenderer;
+import view.listener.game.GameFrameListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

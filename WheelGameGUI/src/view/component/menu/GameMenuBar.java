@@ -1,11 +1,11 @@
-package view.component;
+package view.component.menu;
 
 import controller.PlayerController;
 import view.GameView;
-import view.listener.CloseWindowListener;
-import view.listener.CreatePlayerListener;
-import view.listener.DeletePlayerListener;
-import view.listener.ListPlayerListener;
+import view.listener.player.CreatePlayerListener;
+import view.listener.player.DeletePlayerListener;
+import view.listener.player.ListPlayerListener;
+import view.listener.window.CloseWindowListener;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;

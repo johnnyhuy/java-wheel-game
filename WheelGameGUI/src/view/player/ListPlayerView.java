@@ -4,11 +4,11 @@ import controller.PlayerController;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
-import view.component.TableModel;
-import view.component.TableRenderer;
-import view.listener.CloseWindowListener;
-import view.listener.CreatePlayerListener;
-import view.listener.DeletePlayerListener;
+import view.component.table.TableModel;
+import view.component.table.TableRenderer;
+import view.listener.player.CreatePlayerListener;
+import view.listener.player.DeletePlayerListener;
+import view.listener.window.CloseWindowListener;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

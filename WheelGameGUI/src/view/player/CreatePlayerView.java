@@ -3,9 +3,9 @@ package view.player;
 import controller.PlayerController;
 import model.interfaces.GameEngine;
 import view.SubscriptionView;
-import view.component.LabelPanel;
-import view.listener.CloseWindowListener;
-import view.listener.StorePlayerListener;
+import view.component.panel.LabelPanel;
+import view.listener.player.StorePlayerListener;
+import view.listener.window.CloseWindowListener;
 
 import javax.swing.*;
 import java.awt.*;

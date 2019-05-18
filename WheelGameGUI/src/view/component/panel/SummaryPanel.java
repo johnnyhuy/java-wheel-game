@@ -1,4 +1,6 @@
-package view.component;
+package view.component.panel;
+
+import view.component.frame.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;

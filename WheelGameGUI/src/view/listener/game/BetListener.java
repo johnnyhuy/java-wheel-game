@@ -1,4 +1,4 @@
-package view.listener;
+package view.listener.game;
 
 import controller.GameController;
 import model.BetTypeViewModel;

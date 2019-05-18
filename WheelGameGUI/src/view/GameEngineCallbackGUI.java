@@ -3,7 +3,7 @@ package view;
 import controller.GameController;
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
-import view.component.WheelPanel;
+import view.component.panel.WheelPanel;
 import view.interfaces.GameEngineCallback;
 
 import java.util.HashMap;

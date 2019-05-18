@@ -1,7 +1,7 @@
-package view.component;
+package view.component.panel;
 
 import model.interfaces.GameEngine;
-import view.listener.WheelPanelListener;
+import view.listener.game.WheelPanelListener;
 
 import javax.swing.*;
 import java.awt.*;

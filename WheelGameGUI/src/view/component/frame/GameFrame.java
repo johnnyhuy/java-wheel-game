@@ -1,7 +1,8 @@
-package view.component;
+package view.component.frame;
 
 import controller.PlayerController;
 import view.GameView;
+import view.component.menu.GameMenuBar;
 
 import javax.swing.*;
 import java.awt.*;

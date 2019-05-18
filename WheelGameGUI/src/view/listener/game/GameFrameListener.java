@@ -1,6 +1,6 @@
-package view.listener;
+package view.listener.game;
 
-import view.component.SummaryPanel;
+import view.component.panel.SummaryPanel;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;

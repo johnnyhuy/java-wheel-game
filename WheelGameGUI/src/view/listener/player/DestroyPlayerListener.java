@@ -1,4 +1,4 @@
-package view.listener;
+package view.listener.player;
 
 import controller.PlayerController;
 import model.interfaces.Player;

@@ -1,4 +1,4 @@
-package view.component;
+package view.component.panel;
 
 import controller.GameController;
 import model.BetTypeViewModel;
@@ -6,8 +6,8 @@ import model.PlayerViewModel;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import view.listener.BetListener;
-import view.listener.SpinListener;
+import view.listener.game.BetListener;
+import view.listener.game.SpinListener;
 
 import javax.swing.*;
 import java.awt.*;

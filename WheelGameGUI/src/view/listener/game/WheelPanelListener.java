@@ -1,8 +1,8 @@
-package view.listener;
+package view.listener.game;
 
 import model.interfaces.GameEngine;
-import view.component.BallPanel;
-import view.component.WheelPanel;
+import view.component.panel.BallPanel;
+import view.component.panel.WheelPanel;
 
 import javax.swing.*;
 import java.awt.*;
