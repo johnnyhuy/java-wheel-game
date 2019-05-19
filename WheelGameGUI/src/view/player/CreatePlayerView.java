@@ -2,6 +2,7 @@ package view.player;
 
 import controller.PlayerController;
 import view.SubscriptionView;
+import view.component.frame.CreatePlayerFrame;
 import view.component.panel.LabelPanel;
 import view.listener.player.StorePlayerListener;
 import view.listener.window.CloseWindowListener;
@@ -18,18 +19,17 @@ public class CreatePlayerView extends SubscriptionView {
 
     @Override
     public void render() {
-        JFrame frame = new JFrame();
-        frame.setSize(new Dimension(360, 250));
-        frame.setMinimumSize(new Dimension(360, 250));
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setTitle("Create Player");
+        CreatePlayerFrame frame = new CreatePlayerFrame();
 
         JPanel inputForm = new JPanel();
         inputForm.setLayout(new BoxLayout(inputForm, BoxLayout.Y_AXIS));
         inputForm.setBorder(BorderFactory.createEmptyBorder(20, 20, 0, 20));
         frame.add(inputForm, BorderLayout.NORTH);
+
+        JLabel errorLabel = new JLabel();
+        errorLabel.setForeground(Color.RED);
+        errorLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        inputForm.add(errorLabel);
 
         LabelPanel playerNameLabel = new LabelPanel("Player Name");
         inputForm.add(playerNameLabel);
