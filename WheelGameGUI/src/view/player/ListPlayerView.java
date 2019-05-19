@@ -27,9 +27,9 @@ public class ListPlayerView extends SubscriptionView {
 
     @Override
     public void render() {
-        // TODO: set minimum frame size
         JFrame frame = new JFrame();
         frame.setSize(new Dimension(580, 450));
+        frame.setMinimumSize(new Dimension(580, 450));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

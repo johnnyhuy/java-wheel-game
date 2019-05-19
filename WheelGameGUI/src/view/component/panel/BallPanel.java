@@ -7,11 +7,11 @@ public class BallPanel extends JPanel {
     private int diameter;
     private int radius;
 
-    public BallPanel() {
+    BallPanel() {
         setOpaque(false);
     }
 
-    public int getRadius() {
+    int getRadius() {
         return this.radius;
     }
 
@@ -27,7 +27,7 @@ public class BallPanel extends JPanel {
         this.diameter = radius * 2;
     }
 
-    public int getDiameter() {
+    int getDiameter() {
         return this.diameter;
     }
 }

@@ -21,9 +21,9 @@ public class CreatePlayerView extends SubscriptionView {
 
     @Override
     public void render() {
-        // TODO: set minimum frame size
         JFrame frame = new JFrame();
         frame.setSize(new Dimension(360, 250));
+        frame.setMinimumSize(new Dimension(360, 250));
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
