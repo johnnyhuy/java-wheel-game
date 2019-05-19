@@ -6,22 +6,30 @@ import model.PlayerViewModel;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
+import view.component.Updatable;
 import view.listener.game.BetListener;
 import view.listener.game.SpinListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collection;
 
-public class ToolbarPanel extends JPanel {
+import static helper.BetHelper.getBetablePlayers;
+import static helper.CollectionHelper.isEmpty;
+
+public class ToolbarPanel extends JPanel implements Updatable {
     private final JComboBox<PlayerViewModel> playerCombo;
+    private final JLabel noPlayersLabel;
+    private final JLabel betAmountLabel;
+    private final JTextField betAmount;
+    private final JButton betButton;
+    private final JComboBox<BetTypeViewModel> betTypeCombo;
     private GameController gameController;
     private GameEngine gameEngine;
-    private int padding;
 
     public ToolbarPanel(GameController gameController, GameEngine gameEngine, int padding) {
         this.gameController = gameController;
         this.gameEngine = gameEngine;
-        this.padding = padding;
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
@@ -33,16 +41,19 @@ public class ToolbarPanel extends JPanel {
         spinButton.addActionListener(new SpinListener(gameController));
         westPanel.add(spinButton, BorderLayout.WEST);
 
-        // TODO: hide this panel when all players have placed bets
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
         add(eastPanel, BorderLayout.EAST);
 
-        JLabel betAmountLabel = new JLabel("Bet");
+        noPlayersLabel = new JLabel("No players available");
+        noPlayersLabel.setVisible(false);
+        eastPanel.add(noPlayersLabel);
+
+        betAmountLabel = new JLabel("Bet");
         betAmountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
         eastPanel.add(betAmountLabel);
 
-        JTextField betAmount = new JTextField();
+        betAmount = new JTextField();
         betAmount.setPreferredSize(new Dimension(100, 26));
         eastPanel.add(betAmount);
 
@@ -53,15 +64,43 @@ public class ToolbarPanel extends JPanel {
         }
         eastPanel.add(playerCombo, BorderLayout.CENTER);
 
-        JComboBox<BetTypeViewModel> betTypeCombo = new JComboBox<>();
+        betTypeCombo = new JComboBox<>();
         eastPanel.add(betTypeCombo, BorderLayout.CENTER);
 
         for (BetType betType : BetType.values()) {
             betTypeCombo.addItem(new BetTypeViewModel(betType));
         }
 
-        JButton betButton = new JButton("Place Bet");
+        betButton = new JButton("Place Bet");
         betButton.addActionListener(new BetListener(gameController, playerCombo, betTypeCombo, betAmount));
         eastPanel.add(betButton, BorderLayout.WEST);
+    }
+
+    public void update() {
+        playerCombo.removeAllItems();
+
+        Collection<Player> players = getBetablePlayers(gameEngine);
+        for (Player player : players) {
+            playerCombo.addItem(new PlayerViewModel(player));
+        }
+
+        if (isEmpty(players)) {
+            playerCombo.setVisible(false);
+            betAmountLabel.setVisible(false);
+            betAmount.setVisible(false);
+            betButton.setVisible(false);
+            betTypeCombo.setVisible(false);
+            noPlayersLabel.setVisible(true);
+        } else {
+            playerCombo.setVisible(true);
+            betAmountLabel.setVisible(true);
+            betAmount.setVisible(true);
+            betButton.setVisible(true);
+            betTypeCombo.setVisible(true);
+            noPlayersLabel.setVisible(false);
+        }
+
+        revalidate();
+        repaint();
     }
 }

@@ -28,7 +28,6 @@ public class BetListener implements ActionListener {
         Player player = playerCombo.getItemAt(playerCombo.getSelectedIndex()).getPlayer();
         BetType betType = betTypeCombo.getItemAt(betTypeCombo.getSelectedIndex()).getBetType();
         int bet = Integer.parseInt(betAmount.getText());
-        playerCombo.removeItemAt(playerCombo.getSelectedIndex());
 
         gameController.bet(player, betType, bet);
     }

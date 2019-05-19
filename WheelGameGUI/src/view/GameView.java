@@ -113,8 +113,7 @@ public class GameView extends SubscriptionView {
     public void onNext(Boolean success) {
         players = toList(gameEngine.getAllPlayers());
 
-        toolbar.revalidate();
-        toolbar.repaint();
+        toolbar.update();
 
         summaryPanel.removeAll();
         paintSummaryPanel();
