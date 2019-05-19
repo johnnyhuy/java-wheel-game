@@ -46,28 +46,55 @@ public class WheelPanel extends JPanel {
         }
     }
 
+    /**
+     * Get the ball label.
+     *
+     * @return ball label
+     */
     public BallLabel getBallLabel() {
         return this.ballLabel;
     }
 
+    /**
+     * Get the image icon
+     *
+     * @return image icon
+     */
     public ImageIcon getIcon() {
         return this.icon;
     }
 
+    /**
+     * Get the ball panel
+     *
+     * @return ball panel
+     */
     public BallPanel getBallPanel() {
         return this.ballPanel;
     }
 
+    /**
+     * Get the ball size relative to the wheel panel.
+     *
+     * @return ball size
+     */
     public int getBallSize() {
         return getWidth() > getHeight() ? getHeight() - (padding * 2) : getWidth() - (padding * 2);
     }
 
+    /**
+     * Set the ball position based on a slot mapped to angles.
+     *
+     * @param slot to be set
+     */
     public void setBallAngle(Slot slot) {
-        Double angle = wheelMap.get(slot);
+        double angle = wheelMap.get(slot);
         JLabel wheelLabel = getBallLabel();
         int ballRadius = ballPanel.getRadius();
         int ballDiameter = ballPanel.getDiameter();
         int ballSize = getBallSize();
+
+        saveSlot(slot);
 
         int xOffset = Math.round((wheelLabel.getWidth() / 2) - ballRadius);
         int yOffset = Math.round((wheelLabel.getHeight() / 2) - ballRadius);
@@ -81,15 +108,21 @@ public class WheelPanel extends JPanel {
         ballPanel.setBounds(x, y, ballDiameter, ballDiameter);
     }
 
+    /**
+     * Get a saved slot for its position.
+     *
+     * @return saved slot
+     */
     public Slot getSavedSlot() {
         return this.savedSlot;
     }
 
-    public void saveSlot(Slot slot) {
+    /**
+     * Save a slot.
+     *
+     * @param slot to be saved
+     */
+    private void saveSlot(Slot slot) {
         this.savedSlot = slot;
-    }
-
-    public void resetSavedSlot() {
-        this.savedSlot = null;
     }
 }

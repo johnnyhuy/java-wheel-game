@@ -23,13 +23,11 @@ public class GameEngineCallbackGUI implements GameEngineCallback {
 
     @Override
 	public void nextSlot(Slot slot, GameEngine engine) {
-        wheelPanel.resetSavedSlot();
         wheelPanel.setBallAngle(slot);
     }
 
     @Override
 	public void result(Slot winningSlot, GameEngine engine) {
-        wheelPanel.saveSlot(winningSlot);
         gameController.result();
 	}
 }
