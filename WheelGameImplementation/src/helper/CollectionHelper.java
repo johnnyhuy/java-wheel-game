@@ -15,4 +15,15 @@ public class CollectionHelper {
     public static <T> List<T> toList(Collection<T> collection) {
         return new ArrayList<>(collection);
     }
+
+    /**
+     * Check whether the list is empty.
+     *
+     * @param collection used to check
+     * @param <T>        any type
+     * @return whether the collection is empty
+     */
+    public static <T> boolean isEmpty(Collection<T> collection) {
+        return collection.size() == 0;
+    }
 }
