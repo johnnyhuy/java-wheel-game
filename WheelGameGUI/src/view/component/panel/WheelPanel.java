@@ -15,7 +15,7 @@ public class WheelPanel extends JPanel {
     private final BallPanel ballPanel;
 
     public WheelPanel(GameEngine gameEngine, int padding) {
-        this.padding = padding;
+        this.padding = padding * 10;
         this.ballPanel = new BallPanel();
 
         final String wheelFileLocation = "resources/images/Basic_roulette_wheel_1024x1024.png";

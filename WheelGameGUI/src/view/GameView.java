@@ -38,7 +38,7 @@ public class GameView extends SubscriptionView {
         updatables.add(toolbar);
         frame.add(toolbar, BorderLayout.NORTH);
 
-        WheelPanel wheelPanel = new WheelPanel(gameEngine, padding * 10);
+        WheelPanel wheelPanel = new WheelPanel(gameEngine, padding);
         frame.add(wheelPanel);
 
         SummaryPanel summaryPanel = new SummaryPanel(gameEngine, frame, wheelPanel);
