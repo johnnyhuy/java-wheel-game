@@ -33,7 +33,7 @@ public class PlayerController extends Controller {
     }
 
     public void create() {
-        SubscriptionView view = new CreatePlayerView(gameEngine, this);
+        SubscriptionView view = new CreatePlayerView(this);
         publisher.subscribe(view);
 
         SwingUtilities.invokeLater(new Runnable() {

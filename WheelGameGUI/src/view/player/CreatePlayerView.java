@@ -1,7 +1,6 @@
 package view.player;
 
 import controller.PlayerController;
-import model.interfaces.GameEngine;
 import view.SubscriptionView;
 import view.component.panel.LabelPanel;
 import view.listener.player.StorePlayerListener;
@@ -11,11 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CreatePlayerView extends SubscriptionView {
-    private GameEngine gameEngine;
     private PlayerController playerController;
 
-    public CreatePlayerView(GameEngine gameEngine, PlayerController playerController) {
-        this.gameEngine = gameEngine;
+    public CreatePlayerView(PlayerController playerController) {
         this.playerController = playerController;
     }
 

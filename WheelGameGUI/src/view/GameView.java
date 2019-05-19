@@ -37,7 +37,7 @@ public class GameView extends SubscriptionView {
         GameFrame frame = new GameFrame(this, playerController);
         final int padding = 5;
 
-        ToolbarPanel toolbar = new ToolbarPanel(gameController, gameEngine, padding);
+        ToolbarPanel toolbar = new ToolbarPanel(gameController, gameEngine, gameLogger, padding);
         updatables.add(toolbar);
         frame.add(toolbar, BorderLayout.NORTH);
 

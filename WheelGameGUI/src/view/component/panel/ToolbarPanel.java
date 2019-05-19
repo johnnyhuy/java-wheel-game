@@ -2,6 +2,7 @@ package view.component.panel;
 
 import controller.GameController;
 import model.BetTypeViewModel;
+import model.GameLogger;
 import model.PlayerViewModel;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
@@ -27,7 +28,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
     private GameController gameController;
     private GameEngine gameEngine;
 
-    public ToolbarPanel(GameController gameController, GameEngine gameEngine, int padding) {
+    public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, int padding) {
         this.gameController = gameController;
         this.gameEngine = gameEngine;
 
@@ -72,7 +73,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
         }
 
         betButton = new JButton("Place Bet");
-        betButton.addActionListener(new BetListener(gameController, playerCombo, betTypeCombo, betAmount));
+        betButton.addActionListener(new BetListener(gameController, gameLogger, playerCombo, betTypeCombo, betAmount));
         eastPanel.add(betButton, BorderLayout.WEST);
     }
 
