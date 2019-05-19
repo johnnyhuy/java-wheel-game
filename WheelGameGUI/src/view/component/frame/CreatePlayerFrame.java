@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class CreatePlayerFrame extends JFrame {
     public CreatePlayerFrame() {
-        setSize(new Dimension(360, 250));
-        setMinimumSize(new Dimension(360, 250));
+        setSize(new Dimension(360, 280));
+        setMinimumSize(new Dimension(360, 280));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

@@ -27,21 +27,26 @@ public class CreatePlayerView extends SubscriptionView {
         frame.add(inputForm, BorderLayout.NORTH);
 
         JLabel errorLabel = new JLabel();
+        errorLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         errorLabel.setForeground(Color.RED);
         errorLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         inputForm.add(errorLabel);
 
         LabelPanel playerNameLabel = new LabelPanel("Player Name");
+        playerNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputForm.add(playerNameLabel);
 
         JTextField playerName = new JTextField();
+        playerName.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputForm.add(playerName);
 
         LabelPanel playerPointsLabel = new LabelPanel("Player Points");
+        playerPointsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         playerPointsLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
         inputForm.add(playerPointsLabel);
 
         JTextField playerPoints = new JTextField();
+        playerPoints.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputForm.add(playerPoints);
 
         JPanel southPanel = new JPanel();
@@ -58,7 +63,7 @@ public class CreatePlayerView extends SubscriptionView {
         actionButtons.add(cancelButton);
 
         JButton createButton = new JButton("Create");
-        createButton.addActionListener(new StorePlayerListener(frame, playerController, playerName, playerPoints));
+        createButton.addActionListener(new StorePlayerListener(frame, playerController, playerName, playerPoints, errorLabel));
         actionButtons.add(createButton);
     }
 
