@@ -5,30 +5,23 @@ import model.GameLogger;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameLogPanel extends JPanel {
-    private GameLogger gameLogger;
-
-    public GameLogPanel(GameLogger gameLogger) {
-        this.gameLogger = gameLogger;
-
+class GameLogPanel extends JPanel {
+    GameLogPanel(GameLogger gameLogger) {
         setLayout(new BorderLayout());
 
         JLabel outputTitle = new JLabel("Game Log");
         outputTitle.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(outputTitle, BorderLayout.NORTH);
 
-        JTextArea textArea = new JTextArea();
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        textArea.setOpaque(false);
-        textArea.setEditable(false);
-        textArea.setFocusable(false);
-        gameLogger.add(textArea);
+        JTextPane textPane = new JTextPane();
+        textPane.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height));
+        textPane.setOpaque(false);
+        textPane.setFocusable(false);
+        gameLogger.setTextPane(textPane);
 
         JPanel innerScrollPanel = new JPanel();
         innerScrollPanel.setLayout(new BoxLayout(innerScrollPanel, BoxLayout.Y_AXIS));
-        innerScrollPanel.add(textArea);
+        innerScrollPanel.add(textPane);
 
         JScrollPane outputScrollPane = new JScrollPane(innerScrollPanel);
         outputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

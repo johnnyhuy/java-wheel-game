@@ -9,8 +9,10 @@ import view.GameView;
 import view.SubscriptionView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.concurrent.SubmissionPublisher;
 
+import static helper.ColorHelper.getColor;
 import static helper.StringHelper.capitalize;
 
 public class GameController extends Controller {
@@ -34,7 +36,7 @@ public class GameController extends Controller {
             @Override
             public void run() {
                 view.render();
-                gameLogger.log("Let the games begin! Remember to gamble responsibly.");
+                gameLogger.log("Let the games begin! Remember to gamble responsibly.", getColor(50, 50, 200));
             }
         });
     }
@@ -43,8 +45,8 @@ public class GameController extends Controller {
         new Thread() {
             @Override
             public void run() {
+                gameLogger.log("Spinning the wheel... No more bets!", Color.RED);
                 gameEngine.spin(1, 500, 25);
-                gameLogger.log("Spinning the wheel... No more bets!");
                 publisher.submit(true);
             }
         }.start();
@@ -58,17 +60,17 @@ public class GameController extends Controller {
             player.getPlayerName(),
             bet,
             capitalize(betType.toString())
-        ));
+        ), getColor(102, 0, 204));
 
         publisher.submit(true);
     }
 
-    public void result(Slot winningSlot, GameEngine engine) {
+    public void result(Slot winningSlot) {
         gameLogger.log(String.format(
             "Winning slot is %s %d",
             capitalize(winningSlot.getColor()),
             winningSlot.getNumber()
-        ));
+        ), getColor(0, 200, 0));
 
         publisher.submit(true);
     }

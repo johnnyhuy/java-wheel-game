@@ -1,31 +1,35 @@
 package model;
 
-import javax.swing.text.JTextComponent;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import java.awt.*;
 
 public class GameLogger {
-    private Collection<String> logs = new ArrayList<>();
-    private Collection<JTextComponent> textComponents = new ArrayList<>();
+    private JTextPane textPane;
 
-    public void add(JTextComponent textComponent) {
-        textComponents.add(textComponent);
+    public void setTextPane(JTextPane textPane) {
+        this.textPane = textPane;
     }
 
     public void log(String text) {
-        logs.add(text);
-
-        for (JTextComponent textComponent : textComponents) {
-            textComponent.setText(getText());
-        }
+        print(text, Color.BLACK);
     }
 
-    private String getText() {
-        StringBuilder output = new StringBuilder();
-        for (String text : logs) {
-            output.append(text).append("\n");
-        }
+    public void log(String text, Color color) {
+        print(text, color);
+    }
 
-        return output.toString();
+    private void print(String text, Color color) {
+        StyleContext styleContext = StyleContext.getDefaultStyleContext();
+        AttributeSet attribute = styleContext.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, color);
+        attribute = styleContext.addAttribute(attribute, StyleConstants.Alignment, StyleConstants.ALIGN_LEFT);
+        attribute = styleContext.addAttribute(attribute, StyleConstants.FontFamily, "Lucida Console");
+
+        textPane.setCaretPosition(textPane.getDocument().getLength());
+        textPane.setCharacterAttributes(attribute, false);
+        textPane.replaceSelection(text + "\n");
     }
 }
