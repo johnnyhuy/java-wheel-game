@@ -38,6 +38,9 @@ public class BetListener implements ActionListener {
         if (!isInteger(betAmountText)) {
             gameLogger.log("Bet must be an integer, please try again", Color.RED);
             return;
+        } else if (Integer.parseInt(betAmountText) > player.getPoints()) {
+            gameLogger.log(String.format("Player %s has insufficient points", player.getPlayerName()), Color.RED);
+            return;
         }
 
         gameController.bet(player, betType, Integer.parseInt(betAmountText));
