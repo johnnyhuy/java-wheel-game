@@ -1,5 +1,6 @@
 package controller;
 
+import model.GameLogger;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
 import view.SubscriptionView;
@@ -14,7 +15,7 @@ public class PlayerController extends Controller {
     private SubmissionPublisher<Boolean> publisher;
     private GameEngine gameEngine;
 
-    public PlayerController(GameEngine gameEngine, SubmissionPublisher<Boolean> publisher) {
+    public PlayerController(GameEngine gameEngine, SubmissionPublisher<Boolean> publisher, GameLogger gameLogger) {
         this.gameEngine = gameEngine;
         this.publisher = publisher;
     }

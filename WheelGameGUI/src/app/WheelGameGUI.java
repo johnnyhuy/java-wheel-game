@@ -3,6 +3,7 @@ package app;
 import controller.GameController;
 import controller.PlayerController;
 import model.GameEngineImpl;
+import model.GameLogger;
 import model.SimplePlayer;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
@@ -16,12 +17,13 @@ import java.util.concurrent.SubmissionPublisher;
 public class WheelGameGUI {
     public static void main(String[] args) {
         final GameEngine gameEngine = setupGame();
+        final GameLogger gameLogger = new GameLogger();
 
         Validator.validate(false);
 
         SubmissionPublisher<Boolean> publisher = new SubmissionPublisher<>();
-        final PlayerController playerController = new PlayerController(gameEngine, publisher);
-        final GameController gameController = new GameController(gameEngine, publisher, playerController);
+        final PlayerController playerController = new PlayerController(gameEngine, publisher, gameLogger);
+        final GameController gameController = new GameController(gameEngine, publisher, gameLogger, playerController);
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

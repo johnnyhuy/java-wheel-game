@@ -28,6 +28,6 @@ public class GameEngineCallbackGUI implements GameEngineCallback {
 
     @Override
 	public void result(Slot winningSlot, GameEngine engine) {
-        gameController.result();
+        gameController.result(winningSlot, engine);
 	}
 }

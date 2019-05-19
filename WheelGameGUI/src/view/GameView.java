@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import controller.PlayerController;
+import model.GameLogger;
 import model.interfaces.GameEngine;
 import view.component.Updatable;
 import view.component.frame.GameFrame;
@@ -21,11 +22,13 @@ public class GameView extends SubscriptionView {
     private GameEngine gameEngine;
     private GameController gameController;
     private PlayerController playerController;
+    private GameLogger gameLogger;
 
-    public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController) {
+    public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController, GameLogger gameLogger) {
         this.gameEngine = gameEngine;
         this.gameController = gameController;
         this.playerController = playerController;
+        this.gameLogger = gameLogger;
         this.updatables = new ArrayList<>();
     }
 
@@ -41,7 +44,7 @@ public class GameView extends SubscriptionView {
         WheelPanel wheelPanel = new WheelPanel(gameEngine, padding);
         frame.add(wheelPanel);
 
-        SummaryPanel summaryPanel = new SummaryPanel(gameEngine, frame, wheelPanel);
+        SummaryPanel summaryPanel = new SummaryPanel(gameEngine, gameLogger, frame, wheelPanel);
         updatables.add(summaryPanel);
         frame.add(summaryPanel, BorderLayout.EAST);
 
