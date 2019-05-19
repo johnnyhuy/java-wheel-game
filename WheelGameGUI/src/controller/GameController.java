@@ -53,15 +53,13 @@ public class GameController extends Controller {
     }
 
     public void bet(Player player, BetType betType, int bet) {
-        gameEngine.placeBet(player, bet, betType);
-
         gameLogger.log(String.format(
-            "Player %s has placed a bet of %d on %s",
+            "%s placed %d on %s",
             player.getPlayerName(),
             bet,
             capitalize(betType.toString())
-        ), getColor(102, 0, 204));
-
+        ), getColor(132, 115, 30));
+        gameEngine.placeBet(player, bet, betType);
         publisher.submit(true);
     }
 
@@ -71,6 +69,25 @@ public class GameController extends Controller {
             capitalize(winningSlot.getColor()),
             winningSlot.getNumber()
         ), getColor(0, 200, 0));
+
+        for (Player player : gameEngine.getAllPlayers()) {
+            if (player.getBet() == 0) {
+                gameLogger.log(String.format(
+                    "%s did not bet this round",
+                    player.getPlayerName()
+                ), getColor(200, 0, 0));
+
+                continue;
+            }
+
+            gameLogger.log(String.format(
+                "%s bet %d on %s and now has %d points",
+                player.getPlayerName(),
+                player.getBet(),
+                capitalize(winningSlot.getColor()),
+                player.getPoints()
+            ), getColor(0, 200, 0));
+        }
 
         publisher.submit(true);
     }

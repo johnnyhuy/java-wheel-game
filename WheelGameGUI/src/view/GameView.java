@@ -63,7 +63,7 @@ public class GameView extends SubscriptionView {
 
         frame.addComponentListener(new GameFrameListener(summaryPanel));
 
-        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(gameController, gameEngine, this, wheelPanel));
+        gameEngine.addGameEngineCallback(new GameEngineCallbackGUI(gameController, wheelPanel));
     }
 
     @Override

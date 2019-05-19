@@ -53,8 +53,6 @@ public class GameEngineCallbackImpl implements GameEngineCallback {
             results
                 .append("\n")
                 .append(player.toString());
-
-            player.resetBet();
         }
 
         logger.log(Level.INFO, results.toString());
