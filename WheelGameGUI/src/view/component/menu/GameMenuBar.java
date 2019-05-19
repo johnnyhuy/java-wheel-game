@@ -4,6 +4,7 @@ import controller.PlayerController;
 import view.GameView;
 import view.listener.player.CreatePlayerListener;
 import view.listener.player.DeletePlayerListener;
+import view.listener.player.HelpMeListener;
 import view.listener.player.ListPlayerListener;
 import view.listener.window.CloseWindowListener;
 
@@ -20,6 +21,10 @@ public class GameMenuBar extends JMenuBar {
         JMenu helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_G);
         add(helpMenu);
+
+        JMenuItem helpMe = new JMenuItem("Help me", KeyEvent.VK_P);
+        helpMe.addActionListener(new HelpMeListener());
+        helpMenu.add(helpMe);
 
         JMenuItem listPlayer = new JMenuItem("Players", KeyEvent.VK_P);
         listPlayer.addActionListener(new ListPlayerListener(playerController));
