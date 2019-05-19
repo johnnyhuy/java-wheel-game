@@ -2,7 +2,7 @@
 <component inheritJdk="true">
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
-	<levels>
-		<level name="Validator" value="project"/>
-	</levels>
+	<lib name="Validator.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/Validator.jar!/"/>
+	</lib>
 </component>
