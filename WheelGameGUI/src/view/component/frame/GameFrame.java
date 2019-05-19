@@ -9,7 +9,8 @@ import java.awt.*;
 
 public class GameFrame extends JFrame {
     public GameFrame(GameView gameView, PlayerController playerController) {
-        setSize(780, 600);
+        setSize(975, 600);
+        setMinimumSize(new Dimension(780, 600));
         setJMenuBar(new GameMenuBar(this, gameView, playerController));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
