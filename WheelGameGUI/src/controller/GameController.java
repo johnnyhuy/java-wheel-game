@@ -45,7 +45,7 @@ public class GameController extends Controller {
         new Thread() {
             @Override
             public void run() {
-                gameLogger.log("Spinning the wheel... No more bets!", Color.RED);
+                gameLogger.log("Spinning the wheel... No more bets! 🙌", Color.RED);
                 gameEngine.spin(1, 500, 25);
                 publisher.submit(true);
             }
@@ -65,7 +65,7 @@ public class GameController extends Controller {
 
     public void result(Slot winningSlot) {
         gameLogger.log(String.format(
-            "Winning slot is %s %d",
+            "🤑 Winning slot is %s %d",
             capitalize(winningSlot.getColor()),
             winningSlot.getNumber()
         ), getColor(0, 200, 0));
@@ -81,7 +81,7 @@ public class GameController extends Controller {
             }
 
             gameLogger.log(String.format(
-                "%s bet %d on %s and now has %d points",
+                "❤ %s bet %d on %s and now has %d points",
                 player.getPlayerName(),
                 player.getBet(),
                 capitalize(winningSlot.getColor()),
