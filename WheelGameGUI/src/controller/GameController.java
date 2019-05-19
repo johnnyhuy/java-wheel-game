@@ -36,7 +36,7 @@ public class GameController extends Controller {
             @Override
             public void run() {
                 view.render();
-                gameLogger.log("Let the games begin! Remember to gamble responsibly.", getColor(50, 50, 200));
+                gameLogger.log("Let the games begin! Remember to gamble responsibly 😀👌", getColor(50, 50, 200));
             }
         });
     }

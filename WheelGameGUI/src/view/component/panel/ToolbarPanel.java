@@ -38,7 +38,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
         westPanel.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
         add(westPanel, BorderLayout.WEST);
 
-        JButton spinButton = new JButton("Spin");
+        JButton spinButton = new JButton("⚡ Spin");
         spinButton.addActionListener(new SpinListener(gameController));
         westPanel.add(spinButton, BorderLayout.WEST);
 
@@ -46,7 +46,8 @@ public class ToolbarPanel extends JPanel implements Updatable {
         eastPanel.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
         add(eastPanel, BorderLayout.EAST);
 
-        noPlayersLabel = new JLabel("No players available");
+        noPlayersLabel = new JLabel("No players available 😥");
+        noPlayersLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         noPlayersLabel.setVisible(false);
         eastPanel.add(noPlayersLabel);
 
@@ -72,7 +73,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
             betTypeCombo.addItem(new BetTypeViewModel(betType));
         }
 
-        betButton = new JButton("Place Bet");
+        betButton = new JButton("💸 Place Bet");
         betButton.addActionListener(new BetListener(gameController, gameLogger, playerCombo, betTypeCombo, betAmount));
         eastPanel.add(betButton, BorderLayout.WEST);
     }
