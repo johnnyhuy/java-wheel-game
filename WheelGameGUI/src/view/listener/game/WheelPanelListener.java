@@ -1,6 +1,7 @@
 package view.listener.game;
 
-import model.interfaces.GameEngine;
+import model.interfaces.Slot;
+import view.component.label.BallLabel;
 import view.component.panel.BallPanel;
 import view.component.panel.WheelPanel;
 
@@ -9,34 +10,38 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
+import static helper.ObjectHelper.exists;
+
 public class WheelPanelListener implements ComponentListener {
     private final ImageIcon icon;
-    private final JLabel label;
-    private int ballRadius;
+    private final BallLabel ballLabel;
     private WheelPanel wheelPanel;
     private BallPanel ballPanel;
-    private int iconSize;
 
-    public WheelPanelListener(GameEngine gameEngine, WheelPanel wheelPanel) {
+    public WheelPanelListener(WheelPanel wheelPanel) {
         this.wheelPanel = wheelPanel;
         this.icon = wheelPanel.getIcon();
-        this.label = wheelPanel.getWheelLabel();
+        this.ballLabel = wheelPanel.getBallLabel();
         this.ballPanel = wheelPanel.getBallPanel();
 
-        label.add(ballPanel);
+        ballLabel.add(ballPanel);
     }
 
-    // TODO: ball needs to persist location on window resize
     @Override
     public void componentResized(ComponentEvent e) {
-        iconSize = wheelPanel.getWheelSize();
+        int ballSize = wheelPanel.getBallSize();
 
         // What a ridiculous number aye?
-        ballRadius = (int) Math.round(iconSize * 0.0375);
+        int ballRadius = (int) Math.round(ballSize * 0.0375);
         ballPanel.setRadius(ballRadius);
 
-        Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(iconSize, iconSize, Image.SCALE_DEFAULT));
-        label.setIcon(newIcon);
+        Icon newIcon = new ImageIcon(icon.getImage().getScaledInstance(ballSize, ballSize, Image.SCALE_DEFAULT));
+        ballLabel.setIcon(newIcon);
+
+        Slot savedSlot = wheelPanel.getSavedSlot();
+        if (exists(savedSlot)) {
+            wheelPanel.setBallAngle(savedSlot);
+        }
     }
 
     @Override

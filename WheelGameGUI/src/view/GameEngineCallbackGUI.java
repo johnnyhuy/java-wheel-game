@@ -19,25 +19,17 @@ public class GameEngineCallbackGUI implements GameEngineCallback {
         this.gameView = gameView;
         this.wheelPanel = wheelPanel;
         this.wheelMap = new HashMap<>();
-
-        final double angleIncrement = (double) 360 / Slot.WHEEL_SIZE;
-
-        // Offset the angle to align the picture
-        double angle = (angleIncrement / 2) - (angleIncrement * (double) (Slot.WHEEL_SIZE / 4));
-
-        for (Slot slot : gameEngine.getWheelSlots()) {
-            wheelMap.put(slot, angle);
-            angle += angleIncrement;
-        }
     }
 
     @Override
 	public void nextSlot(Slot slot, GameEngine engine) {
-        wheelPanel.setBallAngle(wheelMap.get(slot));
+        wheelPanel.resetSavedSlot();
+        wheelPanel.setBallAngle(slot);
     }
 
     @Override
 	public void result(Slot winningSlot, GameEngine engine) {
+        wheelPanel.saveSlot(winningSlot);
         gameController.result();
 	}
 }
