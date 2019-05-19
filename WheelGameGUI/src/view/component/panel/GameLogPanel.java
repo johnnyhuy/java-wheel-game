@@ -14,16 +14,12 @@ class GameLogPanel extends JPanel {
         add(outputTitle, BorderLayout.NORTH);
 
         JTextPane textPane = new JTextPane();
-        textPane.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height));
+        textPane.setPreferredSize(new Dimension(0, 0));
         textPane.setOpaque(false);
         textPane.setFocusable(false);
         gameLogger.setTextPane(textPane);
 
-        JPanel innerScrollPanel = new JPanel();
-        innerScrollPanel.setLayout(new BoxLayout(innerScrollPanel, BoxLayout.Y_AXIS));
-        innerScrollPanel.add(textPane);
-
-        JScrollPane outputScrollPane = new JScrollPane(innerScrollPanel);
+        JScrollPane outputScrollPane = new JScrollPane(textPane);
         outputScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         outputScrollPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         outputScrollPane.setBackground(null);
