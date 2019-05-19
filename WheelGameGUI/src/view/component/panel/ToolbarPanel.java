@@ -25,10 +25,12 @@ public class ToolbarPanel extends JPanel implements Updatable {
     private final JTextField betAmount;
     private final JButton betButton;
     private final JComboBox<BetTypeViewModel> betTypeCombo;
+    private final JButton spinButton;
     private GameEngine gameEngine;
 
     public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, int padding) {
         this.gameEngine = gameEngine;
+        boolean isSpinning = false;
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
@@ -36,8 +38,8 @@ public class ToolbarPanel extends JPanel implements Updatable {
         westPanel.setLayout(new FlowLayout(FlowLayout.CENTER, padding / 2, 0));
         add(westPanel, BorderLayout.WEST);
 
-        JButton spinButton = new JButton("⚡ Spin");
-        spinButton.addActionListener(new SpinListener(gameController));
+        spinButton = new JButton("⚡ Spin");
+        spinButton.addActionListener(new SpinListener(gameController, this));
         westPanel.add(spinButton, BorderLayout.WEST);
 
         JPanel eastPanel = new JPanel();
@@ -100,6 +102,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
             noPlayersLabel.setVisible(false);
         }
 
+        setVisible(true);
         revalidate();
         repaint();
     }
