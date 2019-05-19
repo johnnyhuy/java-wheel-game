@@ -22,7 +22,7 @@ public class WheelGameGUI {
         Validator.validate(false);
 
         SubmissionPublisher<Boolean> publisher = new SubmissionPublisher<>();
-        final PlayerController playerController = new PlayerController(gameEngine, publisher, gameLogger);
+        final PlayerController playerController = new PlayerController(gameEngine, publisher);
         final GameController gameController = new GameController(gameEngine, publisher, gameLogger, playerController);
 
         SwingUtilities.invokeLater(new Runnable() {

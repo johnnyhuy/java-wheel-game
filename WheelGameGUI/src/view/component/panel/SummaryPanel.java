@@ -16,7 +16,6 @@ import static helper.StringHelper.capitalize;
 
 public class SummaryPanel extends JPanel implements Updatable {
     private final JTable table;
-    private final GameLogPanel outputPane;
     private final JScrollPane tableScrollPane;
     private GameEngine gameEngine;
     private GameFrame frame;
@@ -43,7 +42,7 @@ public class SummaryPanel extends JPanel implements Updatable {
         tableScrollPane.setWheelScrollingEnabled(true);
         add(tableScrollPane, BorderLayout.NORTH);
 
-        outputPane = new GameLogPanel(gameLogger);
+        GameLogPanel outputPane = new GameLogPanel(gameLogger);
         add(outputPane, BorderLayout.CENTER);
     }
 

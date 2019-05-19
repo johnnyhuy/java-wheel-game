@@ -25,11 +25,9 @@ public class ToolbarPanel extends JPanel implements Updatable {
     private final JTextField betAmount;
     private final JButton betButton;
     private final JComboBox<BetTypeViewModel> betTypeCombo;
-    private GameController gameController;
     private GameEngine gameEngine;
 
     public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, int padding) {
-        this.gameController = gameController;
         this.gameEngine = gameEngine;
 
         setLayout(new BorderLayout());
