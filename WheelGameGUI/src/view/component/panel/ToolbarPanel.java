@@ -101,7 +101,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
             noPlayersLabel.setVisible(false);
         }
 
-        setVisible(true);
+        setEnabled(true);
         revalidate();
         repaint();
     }
