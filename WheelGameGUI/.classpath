@@ -6,7 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/WheelGame"/>
-	<classpathentry exported="true" kind="lib" path="/WheelGame/lib/Validator.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

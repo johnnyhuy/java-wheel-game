@@ -7,7 +7,6 @@ import model.GameLogger;
 import model.SimplePlayer;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
-import validate.Validator;
 import view.GameEngineCallbackImpl;
 
 import javax.swing.*;
@@ -18,8 +17,6 @@ public class WheelGameGUI {
     public static void main(String[] args) {
         final GameEngine gameEngine = setupGame();
         final GameLogger gameLogger = new GameLogger();
-
-        Validator.validate(false);
 
         SubmissionPublisher<Boolean> publisher = new SubmissionPublisher<>();
         final PlayerController playerController = new PlayerController(gameEngine, publisher);
