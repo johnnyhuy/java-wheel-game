@@ -10,14 +10,14 @@ public class SpinListener implements ActionListener {
     private GameController gameController;
     private ToolbarPanel toolbar;
 
-    public SpinListener(GameController gameController, ToolbarPanel toolbar) {
+    public SpinListener(GameController gameController, ToolbarPanel toolbarPanel) {
         this.gameController = gameController;
-        this.toolbar = toolbar;
+        this.toolbar = toolbarPanel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        toolbar.setVisible(false);
+        toolbar.setEnabled(false);
         gameController.spin();
     }
 }

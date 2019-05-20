@@ -22,7 +22,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
     private final JComboBox<PlayerViewModel> playerCombo;
     private final JLabel noPlayersLabel;
     private final JLabel betAmountLabel;
-    private final JTextField betAmount;
+    private final JTextField betAmountField;
     private final JButton betButton;
     private final JComboBox<BetTypeViewModel> betTypeCombo;
     private final JButton spinButton;
@@ -30,7 +30,6 @@ public class ToolbarPanel extends JPanel implements Updatable {
 
     public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, int padding) {
         this.gameEngine = gameEngine;
-        boolean isSpinning = false;
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY), BorderFactory.createEmptyBorder(padding, padding / 2, padding, padding / 2)));
@@ -55,9 +54,9 @@ public class ToolbarPanel extends JPanel implements Updatable {
         betAmountLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
         eastPanel.add(betAmountLabel);
 
-        betAmount = new JTextField();
-        betAmount.setPreferredSize(new Dimension(100, 26));
-        eastPanel.add(betAmount);
+        betAmountField = new JTextField();
+        betAmountField.setPreferredSize(new Dimension(100, 26));
+        eastPanel.add(betAmountField);
 
         playerCombo = new JComboBox<>();
 
@@ -74,7 +73,7 @@ public class ToolbarPanel extends JPanel implements Updatable {
         }
 
         betButton = new JButton("💸 Place Bet");
-        betButton.addActionListener(new BetListener(gameController, gameLogger, playerCombo, betTypeCombo, betAmount));
+        betButton.addActionListener(new BetListener(gameController, gameEngine, gameLogger, this));
         eastPanel.add(betButton, BorderLayout.WEST);
     }
 
@@ -89,14 +88,14 @@ public class ToolbarPanel extends JPanel implements Updatable {
         if (isEmpty(players)) {
             playerCombo.setVisible(false);
             betAmountLabel.setVisible(false);
-            betAmount.setVisible(false);
+            betAmountField.setVisible(false);
             betButton.setVisible(false);
             betTypeCombo.setVisible(false);
             noPlayersLabel.setVisible(true);
         } else {
             playerCombo.setVisible(true);
             betAmountLabel.setVisible(true);
-            betAmount.setVisible(true);
+            betAmountField.setVisible(true);
             betButton.setVisible(true);
             betTypeCombo.setVisible(true);
             noPlayersLabel.setVisible(false);
@@ -105,5 +104,27 @@ public class ToolbarPanel extends JPanel implements Updatable {
         setVisible(true);
         revalidate();
         repaint();
+    }
+
+    public Player getPlayerFromCombo() {
+        return playerCombo.getItemAt(playerCombo.getSelectedIndex()).getPlayer();
+    }
+
+    public String getBetAmountFromField() {
+        return betAmountField.getText();
+    }
+
+    public BetType getBetTypeFromCombo() {
+        return betTypeCombo.getItemAt(betTypeCombo.getSelectedIndex()).getBetType();
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        betTypeCombo.setEnabled(enabled);
+        betButton.setEnabled(enabled);
+        betAmountField.setEnabled(enabled);
+        playerCombo.setEnabled(enabled);
+        spinButton.setEnabled(enabled);
     }
 }
