@@ -7,6 +7,7 @@ import model.PlayerViewModel;
 import model.enumeration.BetType;
 import model.interfaces.GameEngine;
 import model.interfaces.Player;
+import view.GameView;
 import view.component.Updatable;
 import view.listener.game.BetListener;
 import view.listener.game.SpinListener;
@@ -28,7 +29,8 @@ public class ToolbarPanel extends JPanel implements Updatable {
     private final JButton spinButton;
     private GameEngine gameEngine;
 
-    public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, int padding) {
+    public ToolbarPanel(GameController gameController, GameEngine gameEngine, GameLogger gameLogger, GameView gameView) {
+        int padding = gameView.getPadding();
         this.gameEngine = gameEngine;
 
         setLayout(new BorderLayout());

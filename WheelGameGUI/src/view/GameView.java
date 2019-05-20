@@ -25,6 +25,7 @@ public class GameView extends SubscriptionView {
     private GameController gameController;
     private PlayerController playerController;
     private GameLogger gameLogger;
+    private int padding;
 
     public GameView(GameEngine gameEngine, GameController gameController, PlayerController playerController, GameLogger gameLogger) {
         this.gameEngine = gameEngine;
@@ -37,13 +38,13 @@ public class GameView extends SubscriptionView {
     @Override
     public void render() {
         GameFrame frame = new GameFrame(this, playerController);
-        final int padding = 5;
+        padding = 5;
 
-        ToolbarPanel toolbar = new ToolbarPanel(gameController, gameEngine, gameLogger, padding);
+        ToolbarPanel toolbar = new ToolbarPanel(gameController, gameEngine, gameLogger, this);
         updatables.add(toolbar);
         frame.add(toolbar, BorderLayout.NORTH);
 
-        WheelPanel wheelPanel = new WheelPanel(gameEngine, padding);
+        WheelPanel wheelPanel = new WheelPanel(gameEngine, this);
         frame.add(wheelPanel);
 
         SummaryPanel summaryPanel = new SummaryPanel(gameEngine, gameLogger, frame, wheelPanel);
@@ -82,5 +83,9 @@ public class GameView extends SubscriptionView {
         }
 
         getSubscription().request(1);
+    }
+
+    public int getPadding() {
+        return padding;
     }
 }

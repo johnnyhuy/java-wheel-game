@@ -2,6 +2,7 @@ package view.component.panel;
 
 import model.interfaces.GameEngine;
 import model.interfaces.Slot;
+import view.GameView;
 import view.component.label.BallLabel;
 import view.listener.game.WheelPanelListener;
 
@@ -19,7 +20,8 @@ public class WheelPanel extends JPanel {
     private HashMap<Slot, Double> wheelMap = new HashMap<>();
     private Slot savedSlot;
 
-    public WheelPanel(GameEngine gameEngine, int padding) {
+    public WheelPanel(GameEngine gameEngine, GameView gameView) {
+        int padding = gameView.getPadding();
         this.padding = padding * 10;
         this.ballPanel = new BallPanel();
 
