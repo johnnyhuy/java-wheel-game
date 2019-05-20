@@ -19,7 +19,7 @@ public class WheelGameGUI {
         final GameLogger gameLogger = new GameLogger();
 
         SubmissionPublisher<Boolean> publisher = new SubmissionPublisher<>();
-        final PlayerController playerController = new PlayerController(gameEngine, publisher);
+        final PlayerController playerController = new PlayerController(gameEngine, publisher, gameLogger);
         final GameController gameController = new GameController(gameEngine, publisher, gameLogger, playerController);
 
         SwingUtilities.invokeLater(new Runnable() {
