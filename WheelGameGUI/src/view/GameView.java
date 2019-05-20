@@ -13,6 +13,8 @@ import view.listener.game.GameFrameListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +61,13 @@ public class GameView extends SubscriptionView {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         JLabel dateLabel = new JLabel(dateFormat.format(new Date()));
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dateLabel.setText(dateFormat.format(new Date()));
+            }
+        });
+        timer.start();
         eastStatusBar.add(dateLabel);
 
         frame.addComponentListener(new GameFrameListener(summaryPanel));
