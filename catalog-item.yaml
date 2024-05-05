@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: java-wheel-game
+  title: Java Wheel Game
+  description: A simple Java game project for learning Java
+  tags:
+    - java
+spec:
+  type: service
+  lifecycle: experimental
+  owner: johnnyhuy
